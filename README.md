@@ -289,8 +289,7 @@ nest g co moduleName --no-spec
 
 *   [Validación de campos](https://www.npmjs.com/package/node-input-validator)
 *   [Validación de propiedades de clases](https://www.npmjs.com/package/class-validator)
-*   [Configuración de prettier con ESLint](https://khalilstemmler.com/blogs/tooling/prettier/)
-*   [Comprobación y configuración de formato markdown](https://github.com/remarkjs/remark-lint#example-check-markdown-on-the-api)
+
 
 <br>
 

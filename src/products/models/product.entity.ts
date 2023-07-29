@@ -22,22 +22,37 @@ export class Product extends BaseEntity {
     type: 'number',
     minimum: 1,
     maximum: 999999999,
-    example: '12',
+    nullable: false,
+    example: '12'
   })
   id: number;
 
-  @Column({ name: 'value', nullable: false, length: 50 })
+  @Column({
+    name: 'value',
+    type: 'decimal',
+    precision: 6,
+    scale: 3,
+    nullable: false
+  })
   @IsNotEmpty()
-  // @ApiProperty({
-  //   name: 'value',
-  //   description: 'price value of a product',
-  //   type: 'string',
-  //   minLength: 4,
-  //   maxLength: 50,
-  //   example: 'JAVIER GONZALEZ',
-  // })
+  @ApiProperty({
+    name: 'value',
+    description: 'price value of a product',
+    type: 'decimal',
+    example: '4.378',
+  })
   value: string;
 
+  @Column({ name: 'description', length: 50, nullable: false })
+  @IsNotEmpty()
+  @ApiProperty({
+    name: 'firstname',
+    description: 'firstname for a user',
+    type: 'string',
+    minLength: 4,
+    maxLength: 50,
+    example: 'JAVIER',
+  })
   description: string;
 
   sku: string;
@@ -73,18 +88,6 @@ export class Product extends BaseEntity {
     example: '2023-02-17T00:47:58.000Z',
   })
   updateDate: Date;
-
-  // @Column({ name: 'first_name', nullable: false, length: 50 })
-  // @IsNotEmpty()
-  // @ApiProperty({
-  //   name: 'firstname',
-  //   description: 'firstname for a user',
-  //   type: 'string',
-  //   minLength: 4,
-  //   maxLength: 50,
-  //   example: 'JAVIER',
-  // })
-  // firstName: string;
 
   // @Column({ name: 'last_name', nullable: false, length: 50 })
   // @IsNotEmpty()

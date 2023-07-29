@@ -1,6 +1,6 @@
+//External
 /* eslint-disable prettier/prettier */
 /* eslint-disable import/first */
-//External
 import 'dotenv/config'; 
 import { DataSource } from 'typeorm';
 //Const-vars
