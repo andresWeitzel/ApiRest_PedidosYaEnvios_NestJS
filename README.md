@@ -72,7 +72,62 @@ Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplifica
 <details>
   <summary>Ver</summary>
 
- <br>
+<br>
+
+*   Creamos un entorno de trabajo a través de algún ide, luego de crear una carpeta nos posicionamos sobre la misma
+
+```git
+cd 'projectName'
+```
+
+*   Instalamos la última versión LTS de [Nodejs(v18)](https://nodejs.org/en/download)
+* Instalamos NestJS de forma global
+
+```git
+npm i -g @nestjs/cli
+```
+* Creamos un proyecto Nest
+```git
+nest new nombreProyecto
+```
+* Creamos un proyecto Nest
+```git
+nest new nombreProyecto
+```
+* Crear un nuevo modulo sin test
+
+```git
+nest g mo moduleName --no-spec
+```
+
+* Crear un nuevo servicio sin test
+
+```git
+nest g s moduleName --no-spec
+```
+
+* Crear un nuevo controlador sin test
+
+```git
+nest g co moduleName --no-spec
+```
+* Instalamos el plugin para [dotenv (variables de entorno)](https://www.npmjs.com/package/dotenv)
+```git
+npm i dotenv
+```
+* Instalamos el plugin para [TypeORM](https://typeorm.io/) junto con el controlador de mysql para el mapeo de datos.
+```git
+npm i @nestjs/typeorm typeorm mysql2
+```
+* Para el uso del orm, podemos seguir la [guía de configuración de typeorm para db](https://docs.nestjs.com/recipes/sql-typeorm).
+* Instalamos el plugin de nest con [swagger](https://docs.nestjs.com/openapi/introduction) paa la documentación de nuestra Api rest.
+```git
+npm i @nestjs/swagger
+```
+* Instalamos el plugin [class-validator](https://www.npmjs.com/package/class-validator)  para validaciones de tipos de datos, propiedades de clases,  etc.
+```git
+npm i class-validator
+```
 
 
 <br>
