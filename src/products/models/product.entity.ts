@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { ApiProperty, ApiTags } from '@nestjs/swagger';
 import { IsNotEmpty, IsEmail } from 'class-validator';
 import {
@@ -12,7 +13,7 @@ import {
 
 @Entity({ name: 'products' })
 @ApiTags('Product')
-export class Product extends BaseEntity{
+export class Product extends BaseEntity {
   @PrimaryGeneratedColumn()
   @IsNotEmpty()
   @ApiProperty({
@@ -37,14 +38,14 @@ export class Product extends BaseEntity{
   // })
   value: string;
 
-  description:string;
+  description: string;
 
-  sku:string;
-  volume:number;
-  weight:number;
-  quantity:number;
-  product_type:string;
- 
+  sku: string;
+  volume: number;
+  weight: number;
+  quantity: number;
+  product_type: string;
+
   @CreateDateColumn({
     type: 'datetime',
     name: 'creation_date',
@@ -144,7 +145,6 @@ export class Product extends BaseEntity{
   //   example: 'AR',
   // })
   // countryId: string;
-
 
   // @OneToMany(()=> UserAddress, (userAddress) => userAddress.user)
   // userAddress: UserAddress[];
