@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { ApiProperty, ApiTags } from '@nestjs/swagger';
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 import {
   BaseEntity,
   Column,
@@ -14,7 +14,7 @@ import {
 @Entity({ name: 'products' })
 @ApiTags('Product')
 export class Product extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment', { type: 'bigint' })
   @IsNotEmpty()
   @ApiProperty({
     name: 'id',
@@ -23,7 +23,7 @@ export class Product extends BaseEntity {
     minimum: 1,
     maximum: 999999999,
     nullable: false,
-    example: '12'
+    example: '12',
   })
   id: number;
 
@@ -32,7 +32,7 @@ export class Product extends BaseEntity {
     type: 'decimal',
     precision: 6,
     scale: 3,
-    nullable: false
+    nullable: false,
   })
   @IsNotEmpty()
   @ApiProperty({
@@ -41,29 +41,94 @@ export class Product extends BaseEntity {
     type: 'decimal',
     example: '4.378',
   })
-  value: string;
+  value: number;
 
-  @Column({ name: 'description', length: 50, nullable: false })
+  @Column({ name: 'description', length: 700, nullable: false })
   @IsNotEmpty()
   @ApiProperty({
-    name: 'firstname',
-    description: 'firstname for a user',
+    name: 'description',
+    description: 'description of a product',
     type: 'string',
     minLength: 4,
-    maxLength: 50,
-    example: 'JAVIER',
+    maxLength: 700,
+    example: '30 Piezas y Vino Fabric Malbec....',
   })
   description: string;
 
+  @Column({ name: 'sku', length: 10, nullable: false })
+  @IsNotEmpty()
+  @ApiProperty({
+    name: 'sku',
+    description: 'sku of a product',
+    type: 'string',
+    minLength: 1,
+    maxLength: 10,
+    example: 'JJUS78A',
+  })
   sku: string;
+
+  @Column({
+    name: 'volume',
+    type: 'decimal',
+    precision: 6,
+    scale: 3,
+    nullable: false,
+  })
+  @IsNotEmpty()
+  @ApiProperty({
+    name: 'volume',
+    description: 'volume of a product',
+    type: 'decimal',
+    example: '0.500',
+  })
   volume: number;
+
+  @Column({
+    name: 'weight',
+    type: 'decimal',
+    precision: 6,
+    scale: 3,
+    nullable: false,
+  })
+  @IsNotEmpty()
+  @ApiProperty({
+    name: 'weight',
+    description: 'weight of a product',
+    type: 'decimal',
+    example: '0.500',
+  })
   weight: number;
+
+  @Column({
+    name: 'quantity',
+    type: 'bigint',
+    length: 10,
+    nullable: false,
+  })
+  @IsNotEmpty()
+  @ApiProperty({
+    name: 'quantity',
+    description: 'quantity of a product',
+    type: 'bigint',
+    example: '2',
+  })
   quantity: number;
-  product_type: string;
+
+  @Column({ name: 'product_type', length: 10, nullable: false })
+  @IsNotEmpty()
+  @ApiProperty({
+    name: 'productType',
+    description: 'type of a product',
+    type: 'string',
+    minLength: 1,
+    maxLength: 10,
+    example: 'STANDARD (only enum: STANDARD, FRAGILE or COLD)',
+  })
+  productType: string;
 
   @CreateDateColumn({
-    type: 'datetime',
     name: 'creation_date',
+    type: 'datetime',
     nullable: false,
   })
   @IsNotEmpty()
@@ -77,7 +142,7 @@ export class Product extends BaseEntity {
   })
   creationDate: Date;
 
-  @UpdateDateColumn({ type: 'datetime', name: 'update_date', nullable: false })
+  @UpdateDateColumn({ name: 'update_date', type: 'datetime', nullable: false })
   @IsNotEmpty()
   @ApiProperty({
     name: 'updateDate',
@@ -88,66 +153,6 @@ export class Product extends BaseEntity {
     example: '2023-02-17T00:47:58.000Z',
   })
   updateDate: Date;
-
-  // @Column({ name: 'last_name', nullable: false, length: 50 })
-  // @IsNotEmpty()
-  // @ApiProperty({
-  //   name: 'lastname',
-  //   description: 'lastname for a user',
-  //   type: 'string',
-  //   minLength: 4,
-  //   maxLength: 50,
-  //   example: 'GONZALEZ',
-  // })
-  // lastName: string;
-
-  // @Column({ name: 'email', nullable: false, length: 50 })
-  // @IsEmail()
-  // @ApiProperty({
-  //   name: 'email',
-  //   description: 'email for a user',
-  //   type: 'string',
-  //   minLength: 4,
-  //   maxLength: 50,
-  //   example: 'javier_gonzalez@gmail.com',
-  // })
-  // email: string;
-
-  // @Column({ name: 'identification_type', nullable: false, length: 50 })
-  // @IsNotEmpty()
-  // @ApiProperty({
-  //   name: 'identificationType',
-  //   description: 'identification type for a user',
-  //   type: 'string',
-  //   minLength: 4,
-  //   maxLength: 50,
-  //   example: 'DNI',
-  // })
-  // identificationType: string;
-
-  // @Column({ name: 'identification_number', nullable: false, length: 50 })
-  // @IsNotEmpty()
-  // @ApiProperty({
-  //   name: 'identificationNumber',
-  //   description: 'identification number for a user',
-  //   type: 'string',
-  //   minLength: 4,
-  //   maxLength: 50,
-  //   example: '389991221',
-  // })
-  // identificationNumber: string;
-
-  // @Column({ name: 'country_id', nullable: false, length: 50 })
-  // @IsNotEmpty()
-  // @ApiProperty({
-  //   name: 'countryId',
-  //   description: 'country id for a user',
-  //   type: 'string',
-  //   minLength: 4,
-  //   maxLength: 50,
-  //   example: 'AR',
-  // })
-  // countryId: string;
 
   // @OneToMany(()=> UserAddress, (userAddress) => userAddress.user)
   // userAddress: UserAddress[];
