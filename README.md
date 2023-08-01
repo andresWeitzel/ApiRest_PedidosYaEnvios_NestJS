@@ -1,5 +1,5 @@
 # ApiRest_PedidosYaEnvios_NestJS
-Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplificando parte de la arquitectura de desarrollo de PedidosYa Envíos implementa con NestJS, NodeJS, TypeORM, dotenv, cors, swagger, swagger-ui, MySQL, otros.
+Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplificando parte de la arquitectura de desarrollo de PedidosYa Envíos implementado con NestJS, NodeJS, TypeORM, dotenv, cors, swagger, swagger-ui, MySQL, otros.
 
 *   [Repositorio base de datos](https://github.com/andresWeitzel/db_PedidosYaEnvios_MySQL)
 *   [Api Doc PedidosYa Envíos](https://developers.pedidosya.com/courier-api/v3#tag/Shippings/paths/~1v3~1shippings~1estimates/post)
