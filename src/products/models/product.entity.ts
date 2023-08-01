@@ -102,7 +102,6 @@ export class Product extends BaseEntity {
   @Column({
     name: 'quantity',
     type: 'bigint',
-    length: 10,
     nullable: false,
   })
   @IsNotEmpty()

@@ -1,6 +1,4 @@
-//External
 /* eslint-disable prettier/prettier */
-/* eslint-disable import/first */
 import 'dotenv/config'; 
 import { DataSource } from 'typeorm';
 //Const-vars
@@ -18,7 +16,7 @@ export const databaseProviders = [
           username: process.env.DATABASE_USERNAME,
           password: process.env.DATABASE_PASSWORD,
           database: process.env.DATABASE_NAME,
-          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          entities: [__dirname + '/../**/*.entity.{js,ts}'],
           synchronize: true,
           logging: true, //Check custom logger
         });

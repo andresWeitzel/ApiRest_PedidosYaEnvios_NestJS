@@ -284,6 +284,7 @@ nest g co moduleName --no-spec
 - [Typeorm Relationships with cascade](https://stackoverflow.com/questions/55098023/typeorm-cascade-option-cascade-ondelete-onupdate)
 - [Using Foreign keys tutorial](https://leoromanovsky.medium.com/a-blog-without-an-author-typeorm-creates-confusion-with-required-columns-and-optional-foreign-keys-1a3f932d4e67)
 - [Using Foreign keys stackoverflow](https://stackoverflow.com/questions/68556933/typeorm-insert-foreign-key-by-string)
+- [Using Providers with Nestjs](https://docs.nestjs.com/recipes/sql-typeorm)
 
 #### Librerías
 
