@@ -40,4 +40,26 @@ export class ProductsService {
       console.log(`Error in getAllProducts service. Caused by ${error}`);
     }
   }
+
+
+    /**
+   * @description Service to get a product according to id
+   * @param inputId: number
+   * @returns an object with the product
+   */
+    async getByIdProduct(
+      inputId: number
+    ): Promise<Product> {
+      try {
+        inputId = inputId == (null || undefined || 0) ? 1 : inputId;
+
+        return await this.productRepository.findOne({
+          where: {
+            id : inputId,
+          },
+        });
+      } catch (error) {
+        console.log(`Error in getByIdProduct service. Caused by ${error}`);
+      }
+    }
 }

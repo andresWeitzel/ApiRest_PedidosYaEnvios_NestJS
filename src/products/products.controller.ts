@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { Product } from './models/product.entity';
@@ -33,4 +33,21 @@ export class ProductsController {
       console.log(`Error in getAllProducts controller. Caused by ${error}`);
     }
   }
+
+    /**
+   * @description Controller to get a product according to the id passed as a parameter
+   * @param {number} inputId number type
+   * @returns a response with the product and status code
+   */
+    @Get('/id/:inputId')
+    @ApiOperation({ summary: 'Get a product according to the id passed as a parameter' })
+    async getByIdProduct(
+      @Param('inputId') inputId : number
+    ): Promise<Product> {
+      try {
+        return await this.productsService.getByIdProduct(inputId);
+      } catch (error) {
+        console.log(`Error in getByIdProduct controller. Caused by ${error}`);
+      }
+    }
 }
