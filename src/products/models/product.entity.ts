@@ -6,7 +6,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -55,14 +54,14 @@ export class Product extends BaseEntity {
   })
   description: string;
 
-  @Column({ name: 'sku', length: 10, nullable: false })
+  @Column({ name: 'sku', length: 50, nullable: false })
   @IsNotEmpty()
   @ApiProperty({
     name: 'sku',
     description: 'sku of a product',
     type: 'string',
     minLength: 1,
-    maxLength: 10,
+    maxLength: 50,
     example: 'JJUS78A',
   })
   sku: string;
