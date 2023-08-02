@@ -9,16 +9,17 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { ProductType } from '../enums/productType';
 
 @Entity({ name: 'products' })
 @ApiTags('Product')
 export class Product extends BaseEntity {
-  @PrimaryGeneratedColumn('increment', { type: 'bigint' })
+  @PrimaryGeneratedColumn('increment', { type: 'int' })
   @IsNotEmpty()
   @ApiProperty({
     name: 'id',
     description: 'identifier for a product',
-    type: 'number',
+    type: 'int',
     minimum: 1,
     maximum: 999999999,
     nullable: false,
@@ -100,29 +101,27 @@ export class Product extends BaseEntity {
 
   @Column({
     name: 'quantity',
-    type: 'bigint',
+    type: 'int',
     nullable: false,
   })
   @IsNotEmpty()
   @ApiProperty({
     name: 'quantity',
     description: 'quantity of a product',
-    type: 'bigint',
+    type: 'int',
     example: '2',
   })
   quantity: number;
 
-  @Column({ name: 'product_type', length: 10, nullable: false })
+  @Column({ name: 'product_type', type:'enum', enum: ProductType, default : ProductType.STANDARD, nullable: false })
   @IsNotEmpty()
   @ApiProperty({
     name: 'productType',
     description: 'type of a product',
-    type: 'string',
-    minLength: 1,
-    maxLength: 10,
+    type: 'enum',
     example: 'STANDARD (only enum: STANDARD, FRAGILE or COLD)',
   })
-  productType: string;
+  productType: ProductType;
 
   @CreateDateColumn({
     name: 'creation_date',
