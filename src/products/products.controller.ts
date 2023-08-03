@@ -50,4 +50,25 @@ export class ProductsController {
         console.log(`Error in getByIdProduct controller. Caused by ${error}`);
       }
     }
+
+
+       /**
+   * @description Controller to get a product according to the description passed as a parameter
+   * @param {string} inputDescription string type
+   * @returns a response with the product and status code
+   */   
+       @Get('/description/:inputDescription')
+       @ApiOperation({ summary: 'Get a product according to the description passed as a parameter' })
+       async getByDescriptionProducts(
+         @Param('inputDescription') inputDescription : string,
+         @Query('limit') limit: number,
+         @Query('orderBy') orderBy: string,
+         @Query('orderAt') orderAt: string,
+       ): Promise<Product[]> {
+         try {
+           return await this.productsService.getByDescriptionProducts(inputDescription,limit, orderBy, orderAt);
+         } catch (error) {
+           console.log(`Error in getByDescriptionProducts controller. Caused by ${error}`);
+         }
+       }
 }

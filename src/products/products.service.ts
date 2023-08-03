@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, Inject } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 //Models
 import { Product } from './models/product.entity';
 
@@ -62,4 +62,50 @@ export class ProductsService {
         console.log(`Error in getByIdProduct service. Caused by ${error}`);
       }
     }
+
+    async getByValueProducts(
+      inputValue: number,
+      limit: number,
+      orderBy: string,
+      orderAt: string,
+    ): Promise<Product[]> {
+      try {
+        return await this.productRepository.find({
+          where: {
+            value: Like(`%${inputValue}%`),
+          },
+          order: {
+            [orderBy]: orderAt,
+          },
+          take: limit,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+
+    async getByDescriptionProducts(
+      inputDescription: string,
+      limit: number,
+      orderBy: string,
+      orderAt: string,
+    ): Promise<Product[]> {
+      try {
+        return await this.productRepository.find({
+          where: {
+            description: Like(`%${inputDescription}%`),
+          },
+          order: {
+            [orderBy]: orderAt,
+          },
+          take: limit,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+
 }
+
