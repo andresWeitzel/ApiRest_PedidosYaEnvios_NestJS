@@ -13,22 +13,10 @@
 					"name": "GET",
 					"item": [
 						{
-							"name": "Get_By_Id",
+							"name": "GetById",
 							"request": {
 								"method": "GET",
 								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer_token}}",
-										"type": "text",
-										"disabled": true
-									},
 									{
 										"key": "Content-Type",
 										"value": "application/json",
@@ -50,7 +38,76 @@
 							"response": []
 						},
 						{
-							"name": "Get_All",
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/products/list?page=0&limit=100",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"list"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByDescription",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/products/description/sandwich?page=0&limit=200",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"description",
+										"sandwich"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "200"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByProductType",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -73,13 +130,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/products/list?page=0&limit=10",
+									"raw": "{{base_url}}/products/product-type/cold?page=0&limit=10",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"products",
-										"list"
+										"product-type",
+										"cold"
 									],
 									"query": [
 										{

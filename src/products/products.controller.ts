@@ -3,6 +3,7 @@ import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { Product } from './models/product.entity';
+import { ProductType } from './enums/productType';
 
 /**
  * @description Product controller for all crud operations
@@ -18,7 +19,7 @@ export class ProductsController {
    * @queryParam limit: number
    * @queryParam orderBy: string
    * @queryParam orderAt: string
-   * @returns a response with the user/s paginated list and status code
+   * @returns a response with the products paginated list and status code
    */
   @Get('/list')
   @ApiOperation({ summary: 'Get all paginated products with all properties' })
@@ -34,41 +35,85 @@ export class ProductsController {
     }
   }
 
-    /**
+  /**
    * @description Controller to get a product according to the id passed as a parameter
    * @param {number} inputId number type
    * @returns a response with the product and status code
    */
-    @Get('/id/:inputId')
-    @ApiOperation({ summary: 'Get a product according to the id passed as a parameter' })
-    async getByIdProduct(
-      @Param('inputId') inputId : number
-    ): Promise<Product> {
-      try {
-        return await this.productsService.getByIdProduct(inputId);
-      } catch (error) {
-        console.log(`Error in getByIdProduct controller. Caused by ${error}`);
-      }
+  @Get('/id/:inputId')
+  @ApiOperation({
+    summary: 'Get a product according to the id passed as a parameter',
+  })
+  async getByIdProduct(@Param('inputId') inputId: number): Promise<Product> {
+    try {
+      return await this.productsService.getByIdProduct(inputId);
+    } catch (error) {
+      console.log(`Error in getByIdProduct controller. Caused by ${error}`);
     }
+  }
 
-
-       /**
+  /**
    * @description Controller to get a product according to the description passed as a parameter
    * @param {string} inputDescription string type
-   * @returns a response with the product and status code
-   */   
-       @Get('/description/:inputDescription')
-       @ApiOperation({ summary: 'Get a product according to the description passed as a parameter' })
-       async getByDescriptionProducts(
-         @Param('inputDescription') inputDescription : string,
-         @Query('limit') limit: number,
-         @Query('orderBy') orderBy: string,
-         @Query('orderAt') orderAt: string,
-       ): Promise<Product[]> {
-         try {
-           return await this.productsService.getByDescriptionProducts(inputDescription,limit, orderBy, orderAt);
-         } catch (error) {
-           console.log(`Error in getByDescriptionProducts controller. Caused by ${error}`);
-         }
-       }
+   * @queryParam limit: number
+   * @queryParam orderBy: string
+   * @queryParam orderAt: string
+   * @returns a response with the products paginated list and status code
+   */
+  @Get('/description/:inputDescription')
+  @ApiOperation({
+    summary: 'Get a product according to the description passed as a parameter',
+  })
+  async getByDescriptionProducts(
+    @Param('inputDescription') inputDescription: string,
+    @Query('limit') limit: number,
+    @Query('orderBy') orderBy: string,
+    @Query('orderAt') orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      return await this.productsService.getByDescriptionProducts(
+        inputDescription,
+        limit,
+        orderBy,
+        orderAt,
+      );
+    } catch (error) {
+      console.log(
+        `Error in getByDescriptionProducts controller. Caused by ${error}`,
+      );
+    }
+  }
+
+  /** 
+   * @description Controller to get a product according to the product type enum passed as a parameter
+   * @param {enum} inputProductType enum type
+   * @queryParam limit: number
+   * @queryParam orderBy: string
+   * @queryParam orderAt: string
+   * @returns a response with the products paginated list and status code
+   */
+  @Get('/product-type/:inputProductType')
+  @ApiOperation({
+    summary:
+      'Get a product according to the product type enum passed as a parameter',
+  })
+  async getByProductTypeProducts(
+    @Param('inputProductType') inputProductType: ProductType,
+    @Query('limit') limit: number,
+    @Query('orderBy') orderBy: string,
+    @Query('orderAt') orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      return await this.productsService.getByProductTypeProducts(
+        inputProductType,
+        limit,
+        orderBy,
+        orderAt,
+      );
+    } catch (error) {
+      console.log(
+        `Error in getByProductTypeProducts controller. Caused by ${error}`,
+      );
+    }
+  }
 }
