@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 //External
 import { ProductsModule } from './products/products.module';
+import { WaypointsModule } from './waypoints/waypoints.module';
 
 @Module({
-  imports: [ProductsModule],
+  imports: [ProductsModule, WaypointsModule],
   controllers: [AppController],
   providers: [AppService],
 })

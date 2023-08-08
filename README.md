@@ -111,6 +111,18 @@ nest g s moduleName --no-spec
 ```git
 nest g co moduleName --no-spec
 ```
+
+* Podemos automatizar los archivos anteriores con la generación de resources( Esto creara entitie,service,module, controller, etc)
+
+```git
+nest g resource resourceName --no-spec
+```
+```git
+- Seleccionamos los siguientes valores
+- ? What transport layer do you use? REST API
+- ? Would you like to generate CRUD entry points? Yes 
+```
+
 * Instalamos el plugin para [dotenv (variables de entorno)](https://www.npmjs.com/package/dotenv)
 ```git
 npm i dotenv
@@ -165,6 +177,16 @@ nest g s moduleName --no-spec
 nest g co moduleName --no-spec
 ```
 
+* Podemos automatizar los archivos anteriores con la generación de resources( Esto creara entitie,service,module, controller, etc)
+
+```git
+nest g resource resourceName --no-spec
+```
+```git
+- Seleccionamos los siguientes valores
+- ? What transport layer do you use? REST API
+- ? Would you like to generate CRUD entry points? Yes 
+```
 
 <br>
 
