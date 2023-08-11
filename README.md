@@ -309,6 +309,7 @@ nest g resource resourceName --no-spec
 - [Using Providers with Nestjs](https://docs.nestjs.com/recipes/sql-typeorm)
 
 #### Librerías
+- [Habilitar y configurar validaciones con Nestjs](https://betterprogramming.pub/validating-complex-requests-with-nestjs-a-practical-example-b55c287f7c99)
 -  [Validación de campos](https://www.npmjs.com/package/node-input-validator)
 -  [Validación de propiedades de clases](https://www.npmjs.com/package/class-validator)
 - [Validación con enumerados](https://snyk.io/advisor/npm-package/class-validator/functions/class-validator.IsEnum)

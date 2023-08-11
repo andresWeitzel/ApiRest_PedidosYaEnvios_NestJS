@@ -186,7 +186,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "{\r\n    \"value\":16.700,\r\n    \"description\":\"Zapatillas Nike Air Zoom 3\",\r\n    \"sku\": \"OLSS78D\",\r\n    \"volume\":0.899,\r\n    \"weight\":0.899,\r\n    \"quantity\":1,\r\n    \"productType\":\"STANDARD\"\r\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/products/",

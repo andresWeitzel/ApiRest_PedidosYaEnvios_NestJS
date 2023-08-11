@@ -82,10 +82,10 @@ export class Product extends BaseEntity {
     },
   )
   @Min(MIN_VALUE_FOR_VALUE, {
-    message: `The value of number must be greater than ${MIN_VALUE_FOR_VALUE}`,
+    message: `The value of value product must be greater than ${MIN_VALUE_FOR_VALUE}`,
   })
   @Max(MAX_VALUE_FOR_VALUE, {
-    message: `The value of number must be less than ${MAX_VALUE_FOR_VALUE}`,
+    message: `The value of value product must be less than ${MAX_VALUE_FOR_VALUE}`,
   })
   @ApiProperty({
     name: 'value',
@@ -243,7 +243,7 @@ export class Product extends BaseEntity {
   })
   quantity: number;
 
-    /**
+  /**
    * @description product type of a product
    */
   @Column({
@@ -263,9 +263,7 @@ export class Product extends BaseEntity {
   })
   productType: ProductType;
 
-
-
-    /**
+  /**
    * @description creation date of a product
    */
   @CreateDateColumn({
@@ -285,7 +283,7 @@ export class Product extends BaseEntity {
   })
   creationDate: Date;
 
-      /**
+  /**
    * @description update date of a product
    */
   @UpdateDateColumn({ name: 'update_date', type: 'datetime', nullable: false })

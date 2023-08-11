@@ -26,21 +26,15 @@ export class ProductsService {
    */
   async createProduct(product: ProductDTO): Promise<Product> {
     try {
-      if(product==(null || undefined)){
-       // return comprobar logica, cambiar status etc 
-      }
         //-- start with validation object  ---
         const validateObject = await validateProductObject(product);
-
-        console.log(validateObject);
-
         if (validateObject.length) {
           return validateObject;
         }
         //-- end with validation object  ---
-      // const newProduct = this.productRepository.create(product);
+      const newProduct = this.productRepository.create(product);
 
-      // return await this.productRepository.save(newProduct);
+      return await this.productRepository.save(newProduct);
     } catch (error) {
       console.log(`Error in createProduct service. Caused by ${error}`);
     }
