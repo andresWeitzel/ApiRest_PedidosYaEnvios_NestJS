@@ -4,6 +4,7 @@ import { Like, Repository } from 'typeorm';
 //Models
 import { Product } from './models/product.entity';
 import { ProductType } from './enums/productType';
+import { ProductDTO } from './models/product.dto';
 
 /**
  * @description Product srvice for all crud operations
@@ -17,10 +18,25 @@ export class ProductsService {
   ) {}
 
   /**
+   * @description Service to create and save a product
+   * @param {ProductDTO} product ProductDTO type
+   * @returns an object with the product
+   */
+  async createProduct(product: ProductDTO): Promise<Product> {
+    try {
+      const newProduct = this.productRepository.create(product);
+
+      return await this.productRepository.save(newProduct);
+    } catch (error) {
+      console.log(`Error in createProduct service. Caused by ${error}`);
+    }
+  }
+
+  /**
    * @description Service to get a paginated listing of all products
-   * @queryParam limit: number
-   * @queryParam orderBy: string
-   * @queryParam orderAt: string
+   * @param {number} limit number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
    * @returns an object with the products paginated list
    */
   async getAllProducts(
@@ -45,7 +61,7 @@ export class ProductsService {
 
   /**
    * @description Service to get a product according to id
-   * @param inputId: number
+   * @param {number} inputId number type
    * @returns an object with the product
    */
   async getByIdProduct(inputId: number): Promise<Product> {
@@ -85,10 +101,10 @@ export class ProductsService {
 
   /**
    * @description Service to get a product according to the description
-   * @param inputDescription: string
-   * @queryParam limit: number
-   * @queryParam orderBy: string
-   * @queryParam orderAt: string
+   * @param {string} inputDescription string type
+   * @param {number} limit number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
    * @returns an object with the products paginated list
    */
   async getByDescriptionProducts(
@@ -117,10 +133,10 @@ export class ProductsService {
 
   /**
    * @description Service to get a product according to the product type
-   * @param inputProductType enum type
-   * @queryParam limit: number
-   * @queryParam orderBy: string
-   * @queryParam orderAt: string
+   * @param {ProductType} inputProductType enum type
+   * @param {number} limit number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
    * @returns an object with the products paginated list
    */
   async getByProductTypeProducts(

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
+//External
 import { ApiProperty, ApiTags } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString, Length, Min } from 'class-validator';
 import {
   BaseEntity,
   Column,
@@ -9,13 +10,16 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+//Enums
 import { ProductType } from '../enums/productType';
 
 @Entity({ name: 'products' })
 @ApiTags('Product')
 export class Product extends BaseEntity {
   @PrimaryGeneratedColumn('increment', { type: 'int' })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'The id cannot be empty' })
+  @IsInt({ message: 'The id must be of type integer' })
+  @Min(1, { message: 'ID value must be greater than zero' })
   @ApiProperty({
     name: 'id',
     description: 'identifier for a product',
@@ -113,7 +117,13 @@ export class Product extends BaseEntity {
   })
   quantity: number;
 
-  @Column({ name: 'product_type', type:'enum', enum: ProductType, default : ProductType.STANDARD, nullable: false })
+  @Column({
+    name: 'product_type',
+    type: 'enum',
+    enum: ProductType,
+    default: ProductType.STANDARD,
+    nullable: false,
+  })
   @IsNotEmpty()
   @ApiProperty({
     name: 'productType',

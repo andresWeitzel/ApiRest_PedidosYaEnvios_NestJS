@@ -1,8 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Param, Query } from '@nestjs/common';
+//External
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+//Services
 import { ProductsService } from './products.service';
+//Models
 import { Product } from './models/product.entity';
+import { ProductDTO } from './models/product.dto';
+//Enums
 import { ProductType } from './enums/productType';
 
 /**
@@ -13,6 +18,25 @@ import { ProductType } from './enums/productType';
 @ApiTags('ProductsController')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
+
+
+
+    /**
+   * @description Controller to add a product to database
+   * @param {ProductDTO} newProduct ProductDTO type
+   * @returns a response with the products paginated list and status code
+   */
+    @Post('/')
+    @ApiOperation({ summary: 'Add a product to database' })
+    async createProduct(
+      @Body() newProduct: ProductDTO
+    ): Promise<Product> {
+      try {
+        return await this.productsService.createProduct(newProduct);
+      } catch (error) {
+        console.log(`Error in createProduct controller. Caused by ${error}`);
+      }
+    }
 
   /**
    * @description Controller to get a paginated listing of all products

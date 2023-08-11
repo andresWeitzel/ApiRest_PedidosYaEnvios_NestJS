@@ -1,6 +1,9 @@
 /* eslint-disable prettier/prettier */
+//external
 import { ApiProperty, ApiTags } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
+//Enums
+import { ProductType } from '../enums/productType';
 
 // eslint-disable-next-line prettier/prettier
 @ApiTags('ProductDTO')
@@ -67,10 +70,10 @@ export class ProductDTO {
   @ApiProperty({
     name: 'productType',
     description: 'type of a product',
-    type: 'string',
+    type: 'ProductType',
     minLength: 1,
     maxLength: 10,
     example: 'STANDARD (only enum: STANDARD, FRAGILE or COLD)',
   })
-  productType: string;
+  productType: ProductType;
 }
