@@ -5,6 +5,8 @@ import { Like, Repository } from 'typeorm';
 import { Product } from './models/product.entity';
 import { ProductType } from './enums/productType';
 import { ProductDTO } from './models/product.dto';
+//Helpers
+import { validateProductObject } from './helpers/models/validateProductObject';
 
 /**
  * @description Product srvice for all crud operations
@@ -24,9 +26,21 @@ export class ProductsService {
    */
   async createProduct(product: ProductDTO): Promise<Product> {
     try {
-      const newProduct = this.productRepository.create(product);
+      if(product==(null || undefined)){
+       // return comprobar logica, cambiar status etc 
+      }
+        //-- start with validation object  ---
+        const validateObject = await validateProductObject(product);
 
-      return await this.productRepository.save(newProduct);
+        console.log(validateObject);
+
+        if (validateObject.length) {
+          return validateObject;
+        }
+        //-- end with validation object  ---
+      // const newProduct = this.productRepository.create(product);
+
+      // return await this.productRepository.save(newProduct);
     } catch (error) {
       console.log(`Error in createProduct service. Caused by ${error}`);
     }
