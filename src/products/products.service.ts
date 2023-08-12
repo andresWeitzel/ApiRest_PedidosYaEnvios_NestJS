@@ -26,17 +26,47 @@ export class ProductsService {
    */
   async createProduct(product: ProductDTO): Promise<Product> {
     try {
-        //-- start with validation object  ---
-        const validateObject = await validateProductObject(product);
-        if (validateObject.length) {
-          return validateObject;
-        }
-        //-- end with validation object  ---
+      //-- start with validation object  ---
+      const validateObject = await validateProductObject(product);
+      if (validateObject.length) {
+        return validateObject;
+      }
+      //-- end with validation object  ---
       const newProduct = this.productRepository.create(product);
 
       return await this.productRepository.save(newProduct);
     } catch (error) {
       console.log(`Error in createProduct service. Caused by ${error}`);
+    }
+  }
+
+  /**
+   * @description Service to update and save a product according to id
+   * @param {number} inputId number type
+   * @param {ProductDTO} product ProductDTO type
+   * @returns an object with the product
+   */
+  async updateProduct(inputId: number, product: ProductDTO): Promise<Product> {
+    try {
+      //-- start with validation object  ---
+      const validateObject = await validateProductObject(product);
+      if (validateObject.length) {
+        return validateObject;
+      }
+      //-- end with validation object  ---
+
+      const updateProduct = await this.productRepository.update(
+        inputId,
+        product,
+      );
+
+      console.log(updateProduct);
+
+      if (updateProduct != (null || undefined)) {
+        return this.getByIdProduct(inputId);
+      }
+    } catch (error) {
+      console.log(`Error in updateProduct service. Caused by ${error}`);
     }
   }
 

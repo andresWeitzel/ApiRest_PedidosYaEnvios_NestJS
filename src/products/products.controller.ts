@@ -1,6 +1,15 @@
 /* eslint-disable prettier/prettier */
 //External
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 //Services
 import { ProductsService } from './products.service';
@@ -19,24 +28,39 @@ import { ProductType } from './enums/productType';
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
-
-
-    /**
+  /**
    * @description Controller to add a product to database
    * @param {ProductDTO} newProduct ProductDTO type
    * @returns a response with the products paginated list and status code
    */
-    @Post('/')
-    @ApiOperation({ summary: 'Add a product to database' })
-    async createProduct(
-      @Body() newProduct: ProductDTO
-    ): Promise<Product> {
-      try {
-        return await this.productsService.createProduct(newProduct);
-      } catch (error) {
-        console.log(`Error in createProduct controller. Caused by ${error}`);
-      }
+  @Post('/')
+  @ApiOperation({ summary: 'Add a product to database' })
+  async createProduct(@Body() newProduct: ProductDTO): Promise<Product> {
+    try {
+      return await this.productsService.createProduct(newProduct);
+    } catch (error) {
+      console.log(`Error in createProduct controller. Caused by ${error}`);
     }
+  }
+
+  /**
+   * @description Controller to update a product from database
+   * @param {number} inputId number type
+   * @param {ProductDTO} updateProduct ProductDTO type
+   * @returns a response with the products paginated list and status code
+   */
+  @Patch('/:inputId')
+  @ApiOperation({ summary: 'Update a product from database' })
+  async updateProduct(
+    @Param('inputId') inputId: number,
+    @Body() updateProduct: ProductDTO,
+  ): Promise<Product> {
+    try {
+      return await this.productsService.updateProduct(inputId,updateProduct);
+    } catch (error) {
+      console.log(`Error in updateProduct controller. Caused by ${error}`);
+    }
+  }
 
   /**
    * @description Controller to get a paginated listing of all products
@@ -108,7 +132,7 @@ export class ProductsController {
     }
   }
 
-  /** 
+  /**
    * @description Controller to get a product according to the product type enum passed as a parameter
    * @param {enum} inputProductType enum type
    * @queryParam limit: number

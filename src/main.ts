@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 //External
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
