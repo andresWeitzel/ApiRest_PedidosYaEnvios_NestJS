@@ -72,33 +72,31 @@ export class ProductsService {
 
   /**
    * @description Service to get a paginated listing of all products
-   * @param {number} inputPageNro number type
-   * @param {number} inputPageSize number type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
    * @param {string} orderBy string type
    * @param {string} orderAt string type
    * @returns an object with the products paginated list
    */
   async getAllProducts(
-    inputPageNro: number,
-    inputPageSize: number,
+    pageNro: number,
+    pageSize: number,
     orderBy: string,
     orderAt: string,
   ): Promise<Product[]> {
     try {
-      console.log(inputPageNro);
-      inputPageNro =
-        (inputPageNro == (null || undefined || NaN) ? 0 : inputPageNro) || 0;
-      inputPageSize =
-        (inputPageSize == (null || undefined || NaN) ? 20 : inputPageSize) ||
-        20;
+      console.log(pageNro);
+      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
+      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
       orderBy = (orderBy == (null || undefined || '') ? 'id' : orderBy) || 'id';
-      orderAt = (orderAt == (null || undefined || '') ? 'ASC' : orderAt) || 'ASC';
+      orderAt =
+        (orderAt == (null || undefined || '') ? 'ASC' : orderAt) || 'ASC';
       return await this.productRepository.find({
         order: {
           [orderBy]: orderAt,
         },
-        skip: inputPageNro,
-        take: inputPageSize,
+        skip: pageNro,
+        take: pageSize,
       });
     } catch (error) {
       console.log(`Error in getAllProducts service. Caused by ${error}`);
@@ -109,8 +107,8 @@ export class ProductsService {
    * @description Service to get a product according to the type of filter and value
    * @param {string} filterBy string type
    * @param {string} filterValue string type
-   * @param {number} inputPageNro number type
-   * @param {number} inputPageSize number type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
    * @param {string} orderBy string type
    * @param {string} orderAt string type
    * @returns an object with the products paginated list
@@ -118,12 +116,20 @@ export class ProductsService {
   async getAllWithFilterProducts(
     filterBy: string,
     filterValue: string,
-    inputPageNro: number,
-    inputPageSize: number,
+    pageNro: number,
+    pageSize: number,
     orderBy: string,
     orderAt: string,
   ): Promise<Product[]> {
     try {
+      filterBy = (filterBy == (null || undefined) ? 'id' : filterBy) || 'id';
+      filterValue =
+        (filterValue == (null || undefined) ? '1' : filterValue) || '1';
+      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
+      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
+      orderBy = (orderBy == (null || undefined || '') ? 'id' : orderBy) || 'id';
+      orderAt =
+        (orderAt == (null || undefined || '') ? 'ASC' : orderAt) || 'ASC';
       return await this.productRepository.find({
         where: {
           [filterBy]: Like(`%${filterValue}%`),
@@ -131,11 +137,13 @@ export class ProductsService {
         order: {
           [orderBy]: orderAt,
         },
-        skip: inputPageNro,
-        take: inputPageSize,
+        skip: pageNro,
+        take: pageSize,
       });
     } catch (error) {
-      console.log(`Error in getAllWithFilterProducts service. Caused by ${error}`);
+      console.log(
+        `Error in getAllWithFilterProducts service. Caused by ${error}`,
+      );
     }
   }
 
@@ -161,18 +169,25 @@ export class ProductsService {
   /**
    * @description Service to get a product according to the description
    * @param {string} inputDescription string type
-   * @param {number} limit number type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
    * @param {string} orderBy string type
    * @param {string} orderAt string type
    * @returns an object with the products paginated list
    */
   async getByDescriptionProducts(
     inputDescription: string,
-    limit: number,
+    pageNro: number,
+    pageSize: number,
     orderBy: string,
     orderAt: string,
   ): Promise<Product[]> {
     try {
+      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
+      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
+      orderBy = (orderBy == (null || undefined || '') ? 'id' : orderBy) || 'id';
+      orderAt =
+        (orderAt == (null || undefined || '') ? 'ASC' : orderAt) || 'ASC';
       inputDescription =
         inputDescription == (null || undefined || '') ? ' ' : inputDescription;
 
@@ -183,7 +198,8 @@ export class ProductsService {
         order: {
           [orderBy]: orderAt,
         },
-        take: limit,
+        skip: pageNro,
+        take: pageSize,
       });
     } catch (error) {
       console.log(error);
@@ -193,14 +209,16 @@ export class ProductsService {
   /**
    * @description Service to get a product according to the product type
    * @param {ProductType} inputProductType enum type
-   * @param {number} limit number type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
    * @param {string} orderBy string type
    * @param {string} orderAt string type
    * @returns an object with the products paginated list
    */
   async getByProductTypeProducts(
     inputProductType: ProductType,
-    limit: number,
+    pageNro: number,
+    pageSize: number,
     orderBy: string,
     orderAt: string,
   ): Promise<Product[]> {
@@ -218,6 +236,9 @@ export class ProductsService {
             ? ProductType.STANDARD
             : inputProductType;
       }
+      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
+      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
+     
 
       return await this.productRepository.find({
         where: {
@@ -226,7 +247,8 @@ export class ProductsService {
         order: {
           [orderBy]: orderAt,
         },
-        take: limit,
+        skip: pageNro,
+        take: pageSize,
       });
     } catch (error) {
       console.log(error);

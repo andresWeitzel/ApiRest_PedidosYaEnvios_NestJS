@@ -56,7 +56,7 @@ export class ProductsController {
     @Body() updateProduct: ProductDTO,
   ): Promise<Product> {
     try {
-      return await this.productsService.updateProduct(inputId,updateProduct);
+      return await this.productsService.updateProduct(inputId, updateProduct);
     } catch (error) {
       console.log(`Error in updateProduct controller. Caused by ${error}`);
     }
@@ -64,8 +64,8 @@ export class ProductsController {
 
   /**
    * @description Controller to get a paginated listing of all products
-   * @param {number} inputPageNro number type
-   * @param {number} inputPageSize number type 
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
    * @param {string} orderBy string type
    * @param {string} orderAt string type
    * @returns a response with the products paginated list and status code
@@ -73,43 +73,59 @@ export class ProductsController {
   @Get('/list')
   @ApiOperation({ summary: 'Get all paginated products with all properties' })
   async getAllProducts(
-    @Query('inputPageNro') inputPageNro: number,
-    @Query('inputPageSize') inputPageSize: number,
+    @Query('pageNro') pageNro: number,
+    @Query('pageSize') pageSize: number,
     @Query('orderBy') orderBy: string,
     @Query('orderAt') orderAt: string,
   ): Promise<Product[]> {
     try {
-      return await this.productsService.getAllProducts(inputPageNro, inputPageSize, orderBy, orderAt);
+      return await this.productsService.getAllProducts(
+        pageNro,
+        pageSize,
+        orderBy,
+        orderAt,
+      );
     } catch (error) {
       console.log(`Error in getAllProducts controller. Caused by ${error}`);
     }
   }
 
-
   /**
    * @description Controller to get a paginated listing of all products according to the type and value of a product
    * @param {string} filterBy string type
-   * @param {string} filterValue string type  
-   * @param {number} inputPageNro number type
-   * @param {number} inputPageSize number type 
+   * @param {string} filterValue string type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
    * @param {string} orderBy string type
    * @param {string} orderAt string type
    * @returns a response with the products paginated list and status code
    */
   @Get('/list-with-filter')
-  @ApiOperation({ summary: 'Get all paginated products products according to the type and value of a product' })
+  @ApiOperation({
+    summary:
+      'Get all paginated products products according to the type and value of a product',
+  })
   async getAllFilterProducts(
     @Query('filterBy') filterBy: string,
     @Query('filterValue') filterValue: string,
-    @Query('inputPageNro') inputPageNro: number,
-    @Query('inputPageSize') inputPageSize: number,
+    @Query('pageNro') pageNro: number,
+    @Query('pageSize') pageSize: number,
     @Query('orderBy') orderBy: string,
     @Query('orderAt') orderAt: string,
   ): Promise<Product[]> {
     try {
-      return await this.productsService.getAllWithFilterProducts(filterBy, filterValue,inputPageNro, inputPageSize, orderBy, orderAt);
+      return await this.productsService.getAllWithFilterProducts(
+        filterBy,
+        filterValue,
+        pageNro,
+        pageSize,
+        orderBy,
+        orderAt,
+      );
     } catch (error) {
-      console.log(`Error in getAllFilterProducts controller. Caused by ${error}`);
+      console.log(
+        `Error in getAllFilterProducts controller. Caused by ${error}`,
+      );
     }
   }
 
@@ -133,7 +149,8 @@ export class ProductsController {
   /**
    * @description Controller to get a product according to the description passed as a parameter
    * @param {string} inputDescription string type
-   * @param {number} limit number type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
    * @param {string} orderBy string type
    * @param {string} orderAt string type
    * @returns a response with the products paginated list and status code
@@ -144,14 +161,16 @@ export class ProductsController {
   })
   async getByDescriptionProducts(
     @Param('inputDescription') inputDescription: string,
-    @Query('limit') limit: number,
+    @Query('pageNro') pageNro: number,
+    @Query('pageSize') pageSize: number,
     @Query('orderBy') orderBy: string,
     @Query('orderAt') orderAt: string,
   ): Promise<Product[]> {
     try {
       return await this.productsService.getByDescriptionProducts(
         inputDescription,
-        limit,
+        pageNro,
+        pageSize,
         orderBy,
         orderAt,
       );
@@ -165,7 +184,8 @@ export class ProductsController {
   /**
    * @description Controller to get a product according to the product type enum passed as a parameter
    * @param {ProductType} inputProductType enum type
-   * @param {number} limit number type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
    * @param {string} orderBy string type
    * @param {string} orderAt string type
    * @returns a response with the products paginated list and status code
@@ -177,14 +197,16 @@ export class ProductsController {
   })
   async getByProductTypeProducts(
     @Param('inputProductType') inputProductType: ProductType,
-    @Query('limit') limit: number,
+    @Query('pageNro') pageNro: number,
+    @Query('pageSize') pageSize: number,
     @Query('orderBy') orderBy: string,
     @Query('orderAt') orderAt: string,
   ): Promise<Product[]> {
     try {
       return await this.productsService.getByProductTypeProducts(
         inputProductType,
-        limit,
+        pageNro,
+        pageSize,
         orderBy,
         orderAt,
       );

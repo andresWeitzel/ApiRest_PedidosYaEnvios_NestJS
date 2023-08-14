@@ -49,7 +49,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/products/list?page=0&limit=100",
+									"raw": "{{base_url}}/products/list?pageNro=0&pageSize=4&orderBy=id&orderAt=asc",
 									"host": [
 										"{{base_url}}"
 									],
@@ -59,12 +59,70 @@
 									],
 									"query": [
 										{
-											"key": "page",
+											"key": "pageNro",
 											"value": "0"
 										},
 										{
-											"key": "limit",
-											"value": "100"
+											"key": "pageSize",
+											"value": "4"
+										},
+										{
+											"key": "orderBy",
+											"value": "id"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllWithFilter",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/products/list-with-filter?filterBy=id&filterValue=1&pageNro=0&pageSize=10&orderBy=id&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"list-with-filter"
+									],
+									"query": [
+										{
+											"key": "filterBy",
+											"value": "id"
+										},
+										{
+											"key": "filterValue",
+											"value": "1"
+										},
+										{
+											"key": "pageNro",
+											"value": "0"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "orderBy",
+											"value": "id"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
 										}
 									]
 								}
@@ -83,7 +141,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/products/description/sandwich?page=0&limit=200",
+									"raw": "{{base_url}}/products/description/sandwich?pageNro=0&pageSize=10&orderBy=id&orderAt=asc",
 									"host": [
 										"{{base_url}}"
 									],
@@ -94,12 +152,20 @@
 									],
 									"query": [
 										{
-											"key": "page",
+											"key": "pageNro",
 											"value": "0"
 										},
 										{
-											"key": "limit",
-											"value": "200"
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "orderBy",
+											"value": "id"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
 										}
 									]
 								}
@@ -130,7 +196,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/products/product-type/cold?page=0&limit=10",
+									"raw": "{{base_url}}/products/product-type/cold?pageNro=0&pageSize=10&orderBy=id&orderAt=asc",
 									"host": [
 										"{{base_url}}"
 									],
@@ -141,12 +207,20 @@
 									],
 									"query": [
 										{
-											"key": "page",
+											"key": "pageNro",
 											"value": "0"
 										},
 										{
-											"key": "limit",
+											"key": "pageSize",
 											"value": "10"
+										},
+										{
+											"key": "orderBy",
+											"value": "id"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
 										}
 									]
 								}
@@ -196,6 +270,54 @@
 									"path": [
 										"products",
 										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH",
+					"item": [
+						{
+							"name": "update-product",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{bearer_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\":16.700,\r\n    \"description\":\"Zapatillas Nike Air Zoom 3\",\r\n    \"sku\": \"OLSS78D\",\r\n    \"volume\":0.899,\r\n    \"weight\":0.899,\r\n    \"quantity\":1,\r\n    \"productType\":\"STANDARDs\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/products/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"1"
 									]
 								}
 							},
