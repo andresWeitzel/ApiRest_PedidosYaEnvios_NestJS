@@ -4,10 +4,10 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   Param,
   Patch,
   Post,
-  Put,
   Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -18,6 +18,12 @@ import { Product } from './models/product.entity';
 import { ProductDTO } from './models/product.dto';
 //Enums
 import { ProductType } from './enums/productType';
+//Utils
+import { ExceptionHandling } from 'src/utils/http-exception/exception-handling';
+import { error } from 'console';
+//Const-vars
+let newProduct;
+let exceptionHandling;
 
 /**
  * @description Product controller for all crud operations
@@ -35,12 +41,30 @@ export class ProductsController {
    */
   @Post('/')
   @ApiOperation({ summary: 'Add a product to database' })
-  async createProduct(@Body() newProduct: ProductDTO): Promise<Product> {
+  async createProduct(
+    @Body() newProduct: ProductDTO,
+  ): Promise<Product | ExceptionHandling> {
     try {
-      return await this.productsService.createProduct(newProduct);
+      //newProduct = await this.productsService.createProduct(newProduct);
+      newProduct = null;
+
+      if (newProduct != (null || undefined)) {
+        return newProduct;
+      }
+      exceptionHandling = new ExceptionHandling(
+        'The product could not be added to the database.',
+        HttpStatus.BAD_REQUEST,
+      );
     } catch (error) {
       console.log(`Error in createProduct controller. Caused by ${error}`);
+      
+    return exceptionHandling;
     }
+    return exceptionHandling;
+    /*Exception filters 
+    * https://www.youtube.com/watch?v=AWqqg9Dtnc4
+    * https://www.youtube.com/watch?v=4akOFpItbLc
+    * */
   }
 
   /**

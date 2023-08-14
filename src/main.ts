@@ -6,6 +6,7 @@ import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -32,6 +33,7 @@ async function bootstrap() {
   // this is an important step, for further steps in this article
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 //--end with validations--
+
 
   await app.listen(3002);
 }
