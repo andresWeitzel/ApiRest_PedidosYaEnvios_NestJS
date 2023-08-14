@@ -64,22 +64,52 @@ export class ProductsController {
 
   /**
    * @description Controller to get a paginated listing of all products
-   * @queryParam limit: number
-   * @queryParam orderBy: string
-   * @queryParam orderAt: string
+   * @param {number} inputPageNro number type
+   * @param {number} inputPageSize number type 
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
    * @returns a response with the products paginated list and status code
    */
   @Get('/list')
   @ApiOperation({ summary: 'Get all paginated products with all properties' })
   async getAllProducts(
-    @Query('limit') limit: number,
+    @Query('inputPageNro') inputPageNro: number,
+    @Query('inputPageSize') inputPageSize: number,
     @Query('orderBy') orderBy: string,
     @Query('orderAt') orderAt: string,
   ): Promise<Product[]> {
     try {
-      return await this.productsService.getAllProducts(limit, orderBy, orderAt);
+      return await this.productsService.getAllProducts(inputPageNro, inputPageSize, orderBy, orderAt);
     } catch (error) {
       console.log(`Error in getAllProducts controller. Caused by ${error}`);
+    }
+  }
+
+
+  /**
+   * @description Controller to get a paginated listing of all products according to the type and value of a product
+   * @param {string} filterBy string type
+   * @param {string} filterValue string type  
+   * @param {number} inputPageNro number type
+   * @param {number} inputPageSize number type 
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
+   * @returns a response with the products paginated list and status code
+   */
+  @Get('/list-with-filter')
+  @ApiOperation({ summary: 'Get all paginated products products according to the type and value of a product' })
+  async getAllFilterProducts(
+    @Query('filterBy') filterBy: string,
+    @Query('filterValue') filterValue: string,
+    @Query('inputPageNro') inputPageNro: number,
+    @Query('inputPageSize') inputPageSize: number,
+    @Query('orderBy') orderBy: string,
+    @Query('orderAt') orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      return await this.productsService.getAllWithFilterProducts(filterBy, filterValue,inputPageNro, inputPageSize, orderBy, orderAt);
+    } catch (error) {
+      console.log(`Error in getAllFilterProducts controller. Caused by ${error}`);
     }
   }
 
@@ -103,9 +133,9 @@ export class ProductsController {
   /**
    * @description Controller to get a product according to the description passed as a parameter
    * @param {string} inputDescription string type
-   * @queryParam limit: number
-   * @queryParam orderBy: string
-   * @queryParam orderAt: string
+   * @param {number} limit number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
    * @returns a response with the products paginated list and status code
    */
   @Get('/description/:inputDescription')
@@ -134,10 +164,10 @@ export class ProductsController {
 
   /**
    * @description Controller to get a product according to the product type enum passed as a parameter
-   * @param {enum} inputProductType enum type
-   * @queryParam limit: number
-   * @queryParam orderBy: string
-   * @queryParam orderAt: string
+   * @param {ProductType} inputProductType enum type
+   * @param {number} limit number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
    * @returns a response with the products paginated list and status code
    */
   @Get('/product-type/:inputProductType')

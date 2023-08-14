@@ -16,10 +16,7 @@ import {
    * @param {object} objProduct object type
    * @returns an array object with the specific errors (constraints) of each class property
    * @example  [
-      'The value of the site id must be between 2 and 20 characters',
-      'The site id cannot be empty',
-      'The value of the title must be between 2 and 100 characters',
-      'The title cannot be empty'
+    "productType must be one of the following values: STANDARD, FRAGILE, COLD"
     ]
    */
   export const validateProductObject = async (objProduct: ProductDTO) => {

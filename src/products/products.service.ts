@@ -72,28 +72,70 @@ export class ProductsService {
 
   /**
    * @description Service to get a paginated listing of all products
-   * @param {number} limit number type
+   * @param {number} inputPageNro number type
+   * @param {number} inputPageSize number type
    * @param {string} orderBy string type
    * @param {string} orderAt string type
    * @returns an object with the products paginated list
    */
   async getAllProducts(
-    limit: number,
+    inputPageNro: number,
+    inputPageSize: number,
     orderBy: string,
     orderAt: string,
   ): Promise<Product[]> {
     try {
-      limit = limit == (null || undefined) ? 20 : limit;
-      orderBy = orderBy == (null || undefined || '') ? 'id' : orderBy;
-      orderAt = orderAt == (null || undefined || '') ? 'ASC' : orderAt;
+      console.log(inputPageNro);
+      inputPageNro =
+        (inputPageNro == (null || undefined || NaN) ? 0 : inputPageNro) || 0;
+      inputPageSize =
+        (inputPageSize == (null || undefined || NaN) ? 20 : inputPageSize) ||
+        20;
+      orderBy = (orderBy == (null || undefined || '') ? 'id' : orderBy) || 'id';
+      orderAt = (orderAt == (null || undefined || '') ? 'ASC' : orderAt) || 'ASC';
       return await this.productRepository.find({
         order: {
           [orderBy]: orderAt,
         },
-        take: limit,
+        skip: inputPageNro,
+        take: inputPageSize,
       });
     } catch (error) {
       console.log(`Error in getAllProducts service. Caused by ${error}`);
+    }
+  }
+
+  /**
+   * @description Service to get a product according to the type of filter and value
+   * @param {string} filterBy string type
+   * @param {string} filterValue string type
+   * @param {number} inputPageNro number type
+   * @param {number} inputPageSize number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
+   * @returns an object with the products paginated list
+   */
+  async getAllWithFilterProducts(
+    filterBy: string,
+    filterValue: string,
+    inputPageNro: number,
+    inputPageSize: number,
+    orderBy: string,
+    orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      return await this.productRepository.find({
+        where: {
+          [filterBy]: Like(`%${filterValue}%`),
+        },
+        order: {
+          [orderBy]: orderAt,
+        },
+        skip: inputPageNro,
+        take: inputPageSize,
+      });
+    } catch (error) {
+      console.log(`Error in getAllWithFilterProducts service. Caused by ${error}`);
     }
   }
 
@@ -115,27 +157,6 @@ export class ProductsService {
       console.log(`Error in getByIdProduct service. Caused by ${error}`);
     }
   }
-
-  // async getByValueProducts(
-  //   inputValue: number,
-  //   limit: number,
-  //   orderBy: string,
-  //   orderAt: string,
-  // ): Promise<Product[]> {
-  //   try {
-  //     return await this.productRepository.find({
-  //       where: {
-  //         value: Like(`%${inputValue}%`),
-  //       },
-  //       order: {
-  //         [orderBy]: orderAt,
-  //       },
-  //       take: limit,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 
   /**
    * @description Service to get a product according to the description
