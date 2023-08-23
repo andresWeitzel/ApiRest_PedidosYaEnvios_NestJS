@@ -1,15 +1,26 @@
 /* eslint-disable prettier/prettier */
-
-import { BadRequestException, HttpStatus } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable prettier/prettier */
+//External
+import { HttpStatus, Res } from '@nestjs/common';
+import { Response } from 'express';
+//Const-vars
+let code: number;
+let msg: string;
 
 export class ExceptionHandling {
-  constructor(message: string, statusCode: number) {
-    switch (statusCode) {
-      case HttpStatus.BAD_REQUEST:
-        throw new BadRequestException({ message: message, time: new Date() });
+  constructor() {}
 
-      default:
-        throw new BadRequestException('Forbidden');
-    }
+  badRequest(@Res() res: Response, message: string) {
+    code = HttpStatus.BAD_REQUEST;
+    msg = message;
+    return res.status(code).send({ msg: msg });
+  }
+  conflict(@Res() res: Response, message: string) {
+    code = HttpStatus.CONFLICT;
+    msg = message;
+    return res.status(code).send({ msg: msg });
   }
 }
+
+//ADD TIME EXCEPTION SERVER

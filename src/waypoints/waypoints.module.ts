@@ -4,6 +4,6 @@ import { WaypointsController } from './waypoints.controller';
 
 @Module({
   controllers: [WaypointsController],
-  providers: [WaypointsService]
+  providers: [WaypointsService],
 })
 export class WaypointsModule {}

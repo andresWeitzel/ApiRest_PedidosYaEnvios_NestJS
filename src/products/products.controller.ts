@@ -5,11 +5,13 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Res,
   Param,
   Patch,
   Post,
   Query,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 //Services
 import { ProductsService } from './products.service';
@@ -20,10 +22,10 @@ import { ProductDTO } from './models/product.dto';
 import { ProductType } from './enums/productType';
 //Utils
 import { ExceptionHandling } from 'src/utils/http-exception/exception-handling';
-import { error } from 'console';
 //Const-vars
 let newProduct;
-let exceptionHandling;
+let exception: any;
+let msg: string;
 
 /**
  * @description Product controller for all crud operations
@@ -43,28 +45,24 @@ export class ProductsController {
   @ApiOperation({ summary: 'Add a product to database' })
   async createProduct(
     @Body() newProduct: ProductDTO,
-  ): Promise<Product | ExceptionHandling> {
+    @Res() res: Response,
+  ): Promise<ProductDTO | ExceptionHandling> {
     try {
       //newProduct = await this.productsService.createProduct(newProduct);
       newProduct = null;
 
       if (newProduct != (null || undefined)) {
-        return newProduct;
+        msg =
+          'The product could not be added to the database why is null or not defined.';
+        exception = new ExceptionHandling().badRequest(res, msg);
       }
-      exceptionHandling = new ExceptionHandling(
-        'The product could not be added to the database.',
-        HttpStatus.BAD_REQUEST,
-      );
+      return newProduct;
     } catch (error) {
       console.log(`Error in createProduct controller. Caused by ${error}`);
-      
-    return exceptionHandling;
+      msg = `The product could not be added to the database. Caused by ${error}`;
+      exception = new ExceptionHandling().conflict(res, msg);
     }
-    return exceptionHandling;
-    /*Exception filters 
-    * https://www.youtube.com/watch?v=AWqqg9Dtnc4
-    * https://www.youtube.com/watch?v=4akOFpItbLc
-    * */
+    return exception;
   }
 
   /**

@@ -238,7 +238,6 @@ export class ProductsService {
       }
       pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
       pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
-     
 
       return await this.productRepository.find({
         where: {
