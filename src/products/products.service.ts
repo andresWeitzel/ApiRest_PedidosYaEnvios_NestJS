@@ -7,6 +7,18 @@ import { ProductType } from './enums/productType';
 import { ProductDTO } from './models/product.dto';
 //Helpers
 import { validateProductObject } from './helpers/models/validateProductObject';
+//Const-vars
+const ID_NAME_VALUE = 'id';
+const VALUE_NAME_VALUE = 'value';
+const DESCRIPTION_NAME_VALUE = 'description';
+const SKU_NAME_VALUE = 'sku';
+const VOLUME_NAME_VALUE = 'volume';
+const WEIGHT_NAME_VALUE = 'weight';
+const QUANTITY_NAME_VALUE = 'quantity';
+const PRODUCT_TYPE_NAME_VALUE = 'product_type';
+const CREATION_DATE_NAME_VALUE = 'creation_date';
+const UPDATE_DATE_NAME_VALUE = 'update_date';
+
 
 /**
  * @description Product srvice for all crud operations
@@ -88,7 +100,7 @@ export class ProductsService {
       console.log(pageNro);
       pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
       pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
-      orderBy = (orderBy == (null || undefined || '') ? 'id' : orderBy) || 'id';
+      orderBy = (orderBy == (null || undefined || '') ? ID_NAME_VALUE : orderBy) || ID_NAME_VALUE;
       orderAt =
         (orderAt == (null || undefined || '') ? 'ASC' : orderAt) || 'ASC';
       return await this.productRepository.find({
@@ -113,7 +125,7 @@ export class ProductsService {
    * @param {string} orderAt string type
    * @returns an object with the products paginated list
    */
-  async getAllWithFilterProducts(
+  async getAllFilterTypeProducts(
     filterBy: string,
     filterValue: string,
     pageNro: number,
@@ -122,7 +134,31 @@ export class ProductsService {
     orderAt: string,
   ): Promise<Product[]> {
     try {
-      filterBy = (filterBy == (null || undefined) ? 'id' : filterBy) || 'id';
+
+      filterBy = filterBy.toLowerCase();
+
+      switch (filterBy) {
+        case null || undefined: {
+          filterBy = ID_NAME_VALUE;
+          break;
+        }
+        case ID_NAME_VALUE || filterBy.includes(ID_NAME_VALUE): {
+          filterBy = ID_NAME_VALUE;
+          break;
+        }
+        case VALUE_NAME_VALUE || filterBy.includes(VALUE_NAME_VALUE): {
+          filterBy = VALUE_NAME_VALUE;
+          break;
+        }
+        case VALUE_NAME_VALUE || filterBy.includes(VALUE_NAME_VALUE): {
+          filterBy = VALUE_NAME_VALUE;
+          break;
+        }
+        default: {
+          filterBy = ID_NAME_VALUE;
+        }
+      }
+
       filterValue =
         (filterValue == (null || undefined) ? '1' : filterValue) || '1';
       pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
@@ -142,7 +178,7 @@ export class ProductsService {
       });
     } catch (error) {
       console.log(
-        `Error in getAllWithFilterProducts service. Caused by ${error}`,
+        `Error in getAllFilterTypeProducts service. Caused by ${error}`,
       );
     }
   }
@@ -254,8 +290,7 @@ export class ProductsService {
     }
   }
 
-
-    /**
+  /**
    * @description Service to get a product according to the creation or update date
    * @param {string} inputCreationUpdateDate string type
    * @param {number} pageNro number type
@@ -264,31 +299,30 @@ export class ProductsService {
    * @param {string} orderAt string type
    * @returns an object with the products paginated list
    */
-    async getByCreationUpdateDateProducts(
-      inputCreationUpdateDate: Date,
-      pageNro: number,
-      pageSize: number,
-      orderBy: string,
-      orderAt: string,
-    ): Promise<Product[]> {
-      try {
- 
-        pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
-        pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
-  
-        return await this.productRepository.find({
-          where: [
-            {creationDate: inputCreationUpdateDate},
-            {updateDate: inputCreationUpdateDate}
-          ],
-          order: {
-            [orderBy]: orderAt,
-          },
-          skip: pageNro,
-          take: pageSize,
-        });
-      } catch (error) {
-        console.log(error);
-      }
+  async getByCreationUpdateDateProducts(
+    inputCreationUpdateDate: Date,
+    pageNro: number,
+    pageSize: number,
+    orderBy: string,
+    orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
+      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
+
+      return await this.productRepository.find({
+        where: [
+          { creationDate: inputCreationUpdateDate },
+          { updateDate: inputCreationUpdateDate },
+        ],
+        order: {
+          [orderBy]: orderAt,
+        },
+        skip: pageNro,
+        take: pageSize,
+      });
+    } catch (error) {
+      console.log(error);
     }
+  }
 }

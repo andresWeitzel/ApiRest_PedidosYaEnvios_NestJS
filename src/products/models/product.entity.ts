@@ -44,14 +44,14 @@ export class Product extends BaseEntity {
   /**
    * @description id of the product
    */
-  @PrimaryGeneratedColumn('increment', { type: 'int' })
+  @PrimaryGeneratedColumn('increment', { type: 'bigint' })
   @IsNotEmpty({ message: 'The id cannot be empty' })
   @IsInt({ message: 'The id must be of type integer' })
   @Min(MIN_VALUE_ID, { message: 'ID value must be greater than zero' })
   @ApiProperty({
     name: 'id',
     description: 'identifier for a product',
-    type: 'int',
+    type: 'bigint',
     minimum: MIN_VALUE_ID,
     maximum: MAX_VALUE_ID,
     nullable: false,

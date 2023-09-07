@@ -121,12 +121,12 @@ export class ProductsController {
    * @param {string} orderAt string type
    * @returns a response with the products paginated list and status code
    */
-  @Get('/list-with-filter')
+  @Get('/list-with-filter-type')
   @ApiOperation({
     summary:
       'Get all paginated products products according to the type and value of a product',
   })
-  async getAllFilterProducts(
+  async getAllFilterTypeProducts(
     @Query('filterBy') filterBy: string,
     @Query('filterValue') filterValue: string,
     @Query('pageNro') pageNro: number,
@@ -135,7 +135,7 @@ export class ProductsController {
     @Query('orderAt') orderAt: string,
   ): Promise<Product[]> {
     try {
-      return await this.productsService.getAllWithFilterProducts(
+      return await this.productsService.getAllFilterTypeProducts(
         filterBy,
         filterValue,
         pageNro,
