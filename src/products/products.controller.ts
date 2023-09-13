@@ -46,22 +46,36 @@ export class ProductsController {
     @Res() res: Response,
   ): Promise<ProductDTO | ExceptionHandling> {
     try {
-      newProduct = await this.productsService.createProduct(newProduct);
-    
-      if (newProduct == (null || undefined)) {
-        msg =
-          'The product could not be added to the database why is null or not defined.';
-        exception = new ExceptionHandling().badRequest(res, msg);
-        return exception;
-      }
-    return newProduct;
+      // const newProductResult = await this.productsService.createProduct(newProduct);
+      // switch (newProductResult) {
+      //   case null || undefined:
+      //     msg =
+      //       'The product could not be added to the database why is null or not defined.';
+      //     exception = new ExceptionHandling().badRequest(res, msg);
+      //     return exception;
+      //   // case newProduct.hasOwnProperty('error'):
+      //   //   msg =
+      //   //     'The product could not be added to the database why is null or not defined.';
+      //   //   exception = new ExceptionHandling().badRequest(res, msg);
+      //   //   return exception;
+      //   default:
+      //     if(newProductResult.hasOwnProperty('error')){
+      //     return newProductResult[0].message;
+      //     }
+      //     return newProductResult;
+      // }
+      // if (newProduct == null || newProduct == undefined) {
+      //   msg =
+      //     'The product could not be added to the database why is null or not defined.';
+      //   exception = new ExceptionHandling().badRequest(res, msg);
+      //   return exception;
+      // }
     } catch (error) {
       console.log(`Error in createProduct controller. Caused by ${error}`);
       msg = `The product could not be added to the database. Caused by ${error}`;
       exception = new ExceptionHandling().conflict(res, msg);
       return exception;
     }
-  
   }
 
   /**
@@ -168,7 +182,7 @@ export class ProductsController {
   }
 
   /**
-   * @description Controller to get a product according to the description passed as a parameter
+   * @description Controller to get a paginated list products according to the description passed as a parameter
    * @param {string} inputDescription string type
    * @param {number} pageNro number type
    * @param {number} pageSize number type
@@ -203,7 +217,75 @@ export class ProductsController {
   }
 
   /**
-   * @description Controller to get a product according to the product type enum passed as a parameter
+   * @description Controller to get a paginated list products according to the sku passed as a parameter
+   * @param {string} inputSku string type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
+   * @returns a response with the products paginated list and status code
+   */
+  @Get('/sku/:inputSku')
+  @ApiOperation({
+    summary: 'Get a product according to the sku passed as a parameter',
+  })
+  async getBySkuProducts(
+    @Param('inputSku') inputSku: string,
+    @Query('pageNro') pageNro: number,
+    @Query('pageSize') pageSize: number,
+    @Query('orderBy') orderBy: string,
+    @Query('orderAt') orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      return await this.productsService.getBySkuProducts(
+        inputSku,
+        pageNro,
+        pageSize,
+        orderBy,
+        orderAt,
+      );
+    } catch (error) {
+      console.log(`Error in getBySkuProducts controller. Caused by ${error}`);
+    }
+  }
+
+  /**
+   * @description Controller to get a paginated list products according to the volume passed as a parameter
+   * @param {number} inputVolume number type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
+   * @returns a response with the products paginated list and status code
+   */
+  @Get('/volume/:inputVolume')
+  @ApiOperation({
+    summary: 'Get a product according to the volume passed as a parameter',
+  })
+  async getByVolumeProducts(
+    @Param('inputVolume') inputVolume: number,
+    @Query('pageNro') pageNro: number,
+    @Query('pageSize') pageSize: number,
+    @Query('orderBy') orderBy: string,
+    @Query('orderAt') orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      return await this.productsService.getByVolumeProducts(
+        inputVolume,
+        pageNro,
+        pageSize,
+        orderBy,
+        orderAt,
+      );
+    } catch (error) {
+      console.log(
+        `Error in getByVolumeProducts controller. Caused by ${error}`,
+      );
+    }
+  }
+
+  /**
+   * @description Controller to get a paginated list products according to the product type enum passed as a parameter
    * @param {ProductType} inputProductType enum type
    * @param {number} pageNro number type
    * @param {number} pageSize number type
@@ -238,8 +320,8 @@ export class ProductsController {
     }
   }
 
-    /**
-   * @description Controller to get a product according to the creation or update date passed as a parameter
+  /**
+   * @description Controller to get a paginated list products according to the creation or update date passed as a parameter
    * @param {Date} inputCreationUpdateDate Date type
    * @param {number} pageNro number type
    * @param {number} pageSize number type
@@ -247,30 +329,30 @@ export class ProductsController {
    * @param {string} orderAt string type
    * @returns a response with the products paginated list and status code
    */
-    @Get('/creation-update-date/:inputCreationUpdateDate')
-    @ApiOperation({
-      summary:
-        'Get a product according to the creation or update date passed as a parameter',
-    })
-    async getByCreationUpdateDateProducts(
-      @Param('inputCreationUpdateDate') inputCreationUpdateDate: Date,
-      @Query('pageNro') pageNro: number,
-      @Query('pageSize') pageSize: number,
-      @Query('orderBy') orderBy: string,
-      @Query('orderAt') orderAt: string,
-    ): Promise<Product[]> {
-      try {
-        return await this.productsService.getByCreationUpdateDateProducts(
-          inputCreationUpdateDate,
-          pageNro,
-          pageSize,
-          orderBy,
-          orderAt,
-        );
-      } catch (error) {
-        console.log(
-          `Error in getByCreationUpdateDateProducts controller. Caused by ${error}`,
-        );
-      }
+  @Get('/creation-update-date/:inputCreationUpdateDate')
+  @ApiOperation({
+    summary:
+      'Get a product according to the creation or update date passed as a parameter',
+  })
+  async getByCreationUpdateDateProducts(
+    @Param('inputCreationUpdateDate') inputCreationUpdateDate: Date,
+    @Query('pageNro') pageNro: number,
+    @Query('pageSize') pageSize: number,
+    @Query('orderBy') orderBy: string,
+    @Query('orderAt') orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      return await this.productsService.getByCreationUpdateDateProducts(
+        inputCreationUpdateDate,
+        pageNro,
+        pageSize,
+        orderBy,
+        orderAt,
+      );
+    } catch (error) {
+      console.log(
+        `Error in getByCreationUpdateDateProducts controller. Caused by ${error}`,
+      );
     }
+  }
 }

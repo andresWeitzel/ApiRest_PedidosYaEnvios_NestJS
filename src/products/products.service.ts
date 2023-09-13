@@ -10,15 +10,14 @@ import { validateProductObject } from './helpers/models/validateProductObject';
 //Const-vars
 const ID_NAME_VALUE = 'id';
 const VALUE_NAME_VALUE = 'value';
-const DESCRIPTION_NAME_VALUE = 'description';
-const SKU_NAME_VALUE = 'sku';
-const VOLUME_NAME_VALUE = 'volume';
-const WEIGHT_NAME_VALUE = 'weight';
-const QUANTITY_NAME_VALUE = 'quantity';
-const PRODUCT_TYPE_NAME_VALUE = 'product_type';
-const CREATION_DATE_NAME_VALUE = 'creation_date';
-const UPDATE_DATE_NAME_VALUE = 'update_date';
-
+// const DESCRIPTION_NAME_VALUE = 'description';
+// const SKU_NAME_VALUE = 'sku';
+// const VOLUME_NAME_VALUE = 'volume';
+// const WEIGHT_NAME_VALUE = 'weight';
+// const QUANTITY_NAME_VALUE = 'quantity';
+// const PRODUCT_TYPE_NAME_VALUE = 'product_type';
+// const CREATION_DATE_NAME_VALUE = 'creation_date';
+// const UPDATE_DATE_NAME_VALUE = 'update_date';
 
 /**
  * @description Product srvice for all crud operations
@@ -74,7 +73,7 @@ export class ProductsService {
 
       console.log(updateProduct);
 
-      if (updateProduct != (null || undefined)) {
+      if (updateProduct != null || updateProduct != undefined) {
         return this.getByIdProduct(inputId);
       }
     } catch (error) {
@@ -97,12 +96,17 @@ export class ProductsService {
     orderAt: string,
   ): Promise<Product[]> {
     try {
-      console.log(pageNro);
-      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
-      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
-      orderBy = (orderBy == (null || undefined || '') ? ID_NAME_VALUE : orderBy) || ID_NAME_VALUE;
+      pageNro = (pageNro == null || pageNro == undefined ? 0 : pageNro) || 0;
+      pageSize =
+        (pageSize == null || pageSize == undefined ? 20 : pageSize) || 20;
+      orderBy =
+        (orderBy == null || orderBy == undefined || orderBy == ''
+          ? ID_NAME_VALUE
+          : orderBy) || ID_NAME_VALUE;
       orderAt =
-        (orderAt == (null || undefined || '') ? 'ASC' : orderAt) || 'ASC';
+        (orderAt == null || orderAt == undefined || orderAt == ''
+          ? 'ASC'
+          : orderAt) || 'ASC';
       return await this.productRepository.find({
         order: {
           [orderBy]: orderAt,
@@ -134,7 +138,6 @@ export class ProductsService {
     orderAt: string,
   ): Promise<Product[]> {
     try {
-
       filterBy = filterBy.toLowerCase();
 
       switch (filterBy) {
@@ -160,12 +163,20 @@ export class ProductsService {
       }
 
       filterValue =
-        (filterValue == (null || undefined) ? '1' : filterValue) || '1';
-      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
-      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
-      orderBy = (orderBy == (null || undefined || '') ? 'id' : orderBy) || 'id';
+        (filterValue == null || filterValue == undefined ? '1' : filterValue) ||
+        '1';
+      pageNro = (pageNro == null || pageNro == undefined ? 0 : pageNro) || 0;
+      pageSize =
+        (pageSize == null || pageSize == undefined ? 20 : pageSize) || 20;
+      orderBy =
+        (orderBy == null || orderBy == undefined || orderBy == ''
+          ? ID_NAME_VALUE
+          : orderBy) || ID_NAME_VALUE;
       orderAt =
-        (orderAt == (null || undefined || '') ? 'ASC' : orderAt) || 'ASC';
+        (orderAt == null || orderAt == undefined || orderAt == ''
+          ? 'ASC'
+          : orderAt) || 'ASC';
+
       return await this.productRepository.find({
         where: {
           [filterBy]: Like(`%${filterValue}%`),
@@ -203,7 +214,7 @@ export class ProductsService {
   }
 
   /**
-   * @description Service to get a product according to the description
+   * @description Service to get a paginated list products according to the description
    * @param {string} inputDescription string type
    * @param {number} pageNro number type
    * @param {number} pageSize number type
@@ -219,13 +230,23 @@ export class ProductsService {
     orderAt: string,
   ): Promise<Product[]> {
     try {
-      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
-      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
-      orderBy = (orderBy == (null || undefined || '') ? 'id' : orderBy) || 'id';
+      pageNro = (pageNro == null || pageNro == undefined ? 0 : pageNro) || 0;
+      pageSize =
+        (pageSize == null || pageSize == undefined ? 20 : pageSize) || 20;
+      orderBy =
+        (orderBy == null || orderBy == undefined || orderBy == ''
+          ? ID_NAME_VALUE
+          : orderBy) || ID_NAME_VALUE;
       orderAt =
-        (orderAt == (null || undefined || '') ? 'ASC' : orderAt) || 'ASC';
+        (orderAt == null || orderAt == undefined || orderAt == ''
+          ? 'ASC'
+          : orderAt) || 'ASC';
       inputDescription =
-        inputDescription == (null || undefined || '') ? ' ' : inputDescription;
+        inputDescription == null ||
+        inputDescription == undefined ||
+        inputDescription == ''
+          ? ' '
+          : inputDescription;
 
       return await this.productRepository.find({
         where: {
@@ -243,7 +264,102 @@ export class ProductsService {
   }
 
   /**
-   * @description Service to get a product according to the product type
+   * @description Service to get a paginated list products according to the sku
+   * @param {string} inputSku string type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
+   * @returns an object with the products paginated list
+   */
+  async getBySkuProducts(
+    inputSku: string,
+    pageNro: number,
+    pageSize: number,
+    orderBy: string,
+    orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      pageNro = (pageNro == null || pageNro == undefined ? 0 : pageNro) || 0;
+      pageSize =
+        (pageSize == null || pageSize == undefined ? 20 : pageSize) || 20;
+      orderBy =
+        (orderBy == null || orderBy == undefined || orderBy == ''
+          ? ID_NAME_VALUE
+          : orderBy) || ID_NAME_VALUE;
+      orderAt =
+        (orderAt == null || orderAt == undefined || orderAt == ''
+          ? 'ASC'
+          : orderAt) || 'ASC';
+      inputSku =
+        inputSku == null || inputSku == undefined || inputSku == ''
+          ? ' '
+          : inputSku;
+
+      return await this.productRepository.find({
+        where: {
+          sku: Like(`%${inputSku}%`),
+        },
+        order: {
+          [orderBy]: orderAt,
+        },
+        skip: pageNro,
+        take: pageSize,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  /**
+   * @description Service to get a paginated list products according to the volume
+   * @param {number} inputVolume number type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
+   * @returns an object with the products paginated list
+   */
+  async getByVolumeProducts(
+    inputVolume: number,
+    pageNro: number,
+    pageSize: number,
+    orderBy: string,
+    orderAt: string,
+  ): Promise<Product[]> {
+    try {
+      pageNro = (pageNro == null || pageNro == undefined ? 0 : pageNro) || 0;
+      pageSize =
+        (pageSize == null || pageSize == undefined ? 20 : pageSize) || 20;
+      orderBy =
+        (orderBy == null || orderBy == undefined || orderBy == ''
+          ? ID_NAME_VALUE
+          : orderBy) || ID_NAME_VALUE;
+      orderAt =
+        (orderAt == null || orderAt == undefined || orderAt == ''
+          ? 'ASC'
+          : orderAt) || 'ASC';
+      inputVolume =
+        inputVolume == null || inputVolume == undefined ? 1.0 : inputVolume;
+
+      return await this.productRepository.find({
+        where: {
+          volume: inputVolume,
+        },
+        order: {
+          [orderBy]: orderAt,
+        },
+        skip: pageNro,
+        take: pageSize,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  /**
+   * @description Service to get a paginated list products according to the product type
    * @param {ProductType} inputProductType enum type
    * @param {number} pageNro number type
    * @param {number} pageSize number type
@@ -272,8 +388,9 @@ export class ProductsService {
             ? ProductType.STANDARD
             : inputProductType;
       }
-      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
-      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
+      pageNro = (pageNro == null || pageNro == undefined ? 0 : pageNro) || 0;
+      pageSize =
+        (pageSize == null || pageSize == undefined ? 20 : pageSize) || 20;
 
       return await this.productRepository.find({
         where: {
@@ -291,7 +408,7 @@ export class ProductsService {
   }
 
   /**
-   * @description Service to get a product according to the creation or update date
+   * @description Service to get a paginated list products according to the creation or update date
    * @param {string} inputCreationUpdateDate string type
    * @param {number} pageNro number type
    * @param {number} pageSize number type
@@ -307,8 +424,9 @@ export class ProductsService {
     orderAt: string,
   ): Promise<Product[]> {
     try {
-      pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
-      pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
+      pageNro = (pageNro == null || pageNro == undefined ? 0 : pageNro) || 0;
+      pageSize =
+        (pageSize == null || pageSize == undefined ? 20 : pageSize) || 20;
 
       return await this.productRepository.find({
         where: [
