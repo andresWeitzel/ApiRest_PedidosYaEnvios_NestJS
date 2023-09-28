@@ -1,5 +1,5 @@
 # ApiRest_PedidosYaEnvios_NestJS
-Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplificando parte de la arquitectura de desarrollo de PedidosYa Envíos implementado con NestJS, NodeJS, TypeORM, dotenv, cors, swagger, swagger-ui, MySQL, otros.
+Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplificando parte de la arquitectura de desarrollo de PedidosYa Envíos implementado con NestJS, NodeJS, TypeORM, Supertest , Jest, dotenv, cors, swagger, swagger-ui, MySQL, otros.
 
 *   [Repositorio base de datos](https://github.com/andresWeitzel/db_PedidosYaEnvios_MySQL)
 *   [Api Doc PedidosYa Envíos](https://developers.pedidosya.com/courier-api/v3#tag/Shippings/paths/~1v3~1shippings~1estimates/post)
@@ -309,6 +309,10 @@ nest g resource resourceName --no-spec
 - [Using Foreign keys tutorial](https://leoromanovsky.medium.com/a-blog-without-an-author-typeorm-creates-confusion-with-required-columns-and-optional-foreign-keys-1a3f932d4e67)
 - [Using Foreign keys stackoverflow](https://stackoverflow.com/questions/68556933/typeorm-insert-foreign-key-by-string)
 - [Using Providers with Nestjs](https://docs.nestjs.com/recipes/sql-typeorm)
+
+#### Testing
+- [Guía completa Supertest & Jest (Solo usar referencia teórica)](https://ualmtorres.github.io/SeminarioTesting/)
+- [Ejemplo base oficial de implementación de testing)](https://docs.nestjs.com/fundamentals/testing#end-to-end-testing)
 
 #### Librerías
 - [Habilitar y configurar validaciones con Nestjs](https://betterprogramming.pub/validating-complex-requests-with-nestjs-a-practical-example-b55c287f7c99)

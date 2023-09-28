@@ -20,7 +20,7 @@ import { ProductDTO } from './models/product.dto';
 //Enums
 import { ProductType } from './enums/productType';
 //Utils
-import { ExceptionHandling } from 'src/utils/http-exception/exception-handling';
+// import { ExceptionHandling } from 'src/utils/http-exception/exception-handling';
 //Const-vars
 let exception: any;
 let msg: string;
@@ -34,49 +34,49 @@ let msg: string;
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
-  /**
-   * @description Controller to add a product to database
-   * @param {ProductDTO} newProduct ProductDTO type
-   * @returns a response with the products paginated list and status code
-   */
-  @Post('/')
-  @ApiOperation({ summary: 'Add a product to database' })
-  async createProduct(
-    @Body() newProduct: ProductDTO,
-    @Res() res: Response,
-  ): Promise<ProductDTO | ExceptionHandling> {
-    try {
-      // const newProductResult = await this.productsService.createProduct(newProduct);
-      // switch (newProductResult) {
-      //   case null || undefined:
-      //     msg =
-      //       'The product could not be added to the database why is null or not defined.';
-      //     exception = new ExceptionHandling().badRequest(res, msg);
-      //     return exception;
-      //   // case newProduct.hasOwnProperty('error'):
-      //   //   msg =
-      //   //     'The product could not be added to the database why is null or not defined.';
-      //   //   exception = new ExceptionHandling().badRequest(res, msg);
-      //   //   return exception;
-      //   default:
-      //     if(newProductResult.hasOwnProperty('error')){
-      //     return newProductResult[0].message;
-      //     }
-      //     return newProductResult;
-      // }
-      // if (newProduct == null || newProduct == undefined) {
-      //   msg =
-      //     'The product could not be added to the database why is null or not defined.';
-      //   exception = new ExceptionHandling().badRequest(res, msg);
-      //   return exception;
-      // }
-    } catch (error) {
-      console.log(`Error in createProduct controller. Caused by ${error}`);
-      msg = `The product could not be added to the database. Caused by ${error}`;
-      exception = new ExceptionHandling().conflict(res, msg);
-      return exception;
-    }
-  }
+  // /**
+  //  * @description Controller to add a product to database
+  //  * @param {ProductDTO} newProduct ProductDTO type
+  //  * @returns a response with the products paginated list and status code
+  //  */
+  // @Post('/')
+  // @ApiOperation({ summary: 'Add a product to database' })
+  // async createProduct(
+  //   @Body() newProduct: ProductDTO,
+  //   @Res() res: Response,
+  // ): Promise<ProductDTO | ExceptionHandling> {
+  //   try {
+  //     // const newProductResult = await this.productsService.createProduct(newProduct);
+  //     // switch (newProductResult) {
+  //     //   case null || undefined:
+  //     //     msg =
+  //     //       'The product could not be added to the database why is null or not defined.';
+  //     //     exception = new ExceptionHandling().badRequest(res, msg);
+  //     //     return exception;
+  //     //   // case newProduct.hasOwnProperty('error'):
+  //     //   //   msg =
+  //     //   //     'The product could not be added to the database why is null or not defined.';
+  //     //   //   exception = new ExceptionHandling().badRequest(res, msg);
+  //     //   //   return exception;
+  //     //   default:
+  //     //     if(newProductResult.hasOwnProperty('error')){
+  //     //     return newProductResult[0].message;
+  //     //     }
+  //     //     return newProductResult;
+  //     // }
+  //     // if (newProduct == null || newProduct == undefined) {
+  //     //   msg =
+  //     //     'The product could not be added to the database why is null or not defined.';
+  //     //   exception = new ExceptionHandling().badRequest(res, msg);
+  //     //   return exception;
+  //     // }
+  //   } catch (error) {
+  //     console.log(`Error in createProduct controller. Caused by ${error}`);
+  //     msg = `The product could not be added to the database. Caused by ${error}`;
+  //     exception = new ExceptionHandling().conflict(res, msg);
+  //     return exception;
+  //   }
+  // }
 
   /**
    * @description Controller to update a product from database
