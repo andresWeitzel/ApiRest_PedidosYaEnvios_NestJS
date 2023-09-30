@@ -1,5 +1,5 @@
 # ApiRest_PedidosYaEnvios_NestJS
-Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplificando parte de la arquitectura de desarrollo de PedidosYa Envíos implementado con NestJS, NodeJS, TypeORM, Supertest , Jest, dotenv, cors, swagger, swagger-ui, MySQL, otros.
+Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplificando parte de la arquitectura de desarrollo de PedidosYa Envíos implementado con NestJS, NodeJS, Typescript, TypeORM, Supertest , Jest, dotenv, cors, swagger, swagger-ui, MySQL, otros.
 
 *   [Repositorio base de datos](https://github.com/andresWeitzel/db_PedidosYaEnvios_MySQL)
 *   [Api Doc PedidosYa Envíos](https://developers.pedidosya.com/courier-api/v3#tag/Shippings/paths/~1v3~1shippings~1estimates/post)
@@ -311,6 +311,7 @@ nest g resource resourceName --no-spec
 - [Using Providers with Nestjs](https://docs.nestjs.com/recipes/sql-typeorm)
 
 #### Testing
+- [Ejemplo configuración testing desde cero](https://medium.com/@csalazar94/javascript-testing-made-easy-a-step-by-step-guide-with-jest-and-supertest-8e2a35f13506)
 - [Guía completa Supertest & Jest (Solo usar referencia teórica)](https://ualmtorres.github.io/SeminarioTesting/)
 - [Ejemplo base oficial de implementación de testing)](https://docs.nestjs.com/fundamentals/testing#end-to-end-testing)
 
