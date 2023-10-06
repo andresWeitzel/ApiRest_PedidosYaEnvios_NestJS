@@ -46,18 +46,22 @@ export class ProductsController {
     @Res() res: Response,
   ): Promise<ProductDTO | ExceptionHandling> {
     try {
-      // const newProductResult = await this.productsService.createProduct(newProduct);
+      const newProductResult = await this.productsService.createProduct(newProduct);
+      console.log(newProductResult);
+      return newProductResult;
+
+
       // switch (newProductResult) {
       //   case null || undefined:
       //     msg =
       //       'The product could not be added to the database why is null or not defined.';
       //     exception = new ExceptionHandling().badRequest(res, msg);
       //     return exception;
-      //   // case newProduct.hasOwnProperty('error'):
-      //   //   msg =
-      //   //     'The product could not be added to the database why is null or not defined.';
-      //   //   exception = new ExceptionHandling().badRequest(res, msg);
-      //   //   return exception;
+        // case newProduct.hasOwnProperty('error'):
+        //   msg =
+        //     'The product could not be added to the database why is null or not defined.';
+        //   exception = new ExceptionHandling().badRequest(res, msg);
+        //   return exception;
       //   default:
       //     if(newProductResult.hasOwnProperty('error')){
       //     return newProductResult[0].message;

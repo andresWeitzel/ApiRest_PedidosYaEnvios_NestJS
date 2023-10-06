@@ -45,7 +45,9 @@ export class ProductsService {
       //-- end with validation object  ---
       const newProduct = this.productRepository.create(product);
 
-      return await this.productRepository.save(newProduct);
+      const newProductSaved = await this.productRepository.save(newProduct);
+
+      return newProductSaved;
     } catch (error) {
       console.log(`Error in createProduct service. Caused by ${error}`);
     }
