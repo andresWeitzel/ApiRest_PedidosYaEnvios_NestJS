@@ -83,7 +83,8 @@ describe('ProductsControllerTest', () => {
       );
     });
   });
-  //End for getAllFilterTypeProducts
+  //End for getAllProducts
+  //Start with getAllFilterTypeProduct
   describe('getAllFilterTypeProducts', () => {
     it(`should return a paginated listing of all products for page ${FIRST_PAGE_VALUE}, quantity ${FIRST_QUANTITY_VALUE}, order at ${VOLUME_NAME_VALUE} and order by ${ORDER_DESC_NAME_VALUE} according to the type of field ${ID_NAME_VALUE} and value '1' of the field of products`, async () => {
       productsList = await productsController.
@@ -101,4 +102,6 @@ describe('ProductsControllerTest', () => {
       );
     });
   });
+  
+  //End with getAllFilterTypeProduct
 });
