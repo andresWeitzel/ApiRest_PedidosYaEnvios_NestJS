@@ -23,14 +23,14 @@ import {
 //Enums
 import { ProductType } from '../enums/productType';
 //Const-vars
-const NAME_VALUE_FOR_ID = "id";
-const NAME_VALUE_FOR_VALUE = "value";
-const NAME_VALUE_FOR_DESCRIPTION="description";
-const NAME_VALUE_FOR_SKU = "sku";
-const NAME_VALUE_FOR_VOLUME = "volume";
-const NAME_VALUE_FOR_WEIGHT = "weight";
-const NAME_VALUE_FOR_QUANTITY ="quantity";
-const NAME_VALUE_FOR_PRODUCT_TYPE ="productType";
+const NAME_VALUE_FOR_ID = 'id';
+const NAME_VALUE_FOR_VALUE = 'value';
+const NAME_VALUE_FOR_DESCRIPTION = 'description';
+const NAME_VALUE_FOR_SKU = 'sku';
+const NAME_VALUE_FOR_VOLUME = 'volume';
+const NAME_VALUE_FOR_WEIGHT = 'weight';
+const NAME_VALUE_FOR_QUANTITY = 'quantity';
+const NAME_VALUE_FOR_PRODUCT_TYPE = 'productType';
 const MIN_VALUE_ID = 1;
 const MAX_VALUE_ID = 999999999;
 const DECIMAL_PRECISION_VALUE = 6;
@@ -55,9 +55,11 @@ export class Product extends BaseEntity {
   @PrimaryGeneratedColumn('increment', { type: 'bigint' })
   @IsNotEmpty({ message: `The ${NAME_VALUE_FOR_ID} cannot be empty` })
   @IsInt({ message: `The ${NAME_VALUE_FOR_ID} must be of type integer` })
-  @Min(MIN_VALUE_ID, { message: `${NAME_VALUE_FOR_ID} value must be greater than zero` })
+  @Min(MIN_VALUE_ID, {
+    message: `${NAME_VALUE_FOR_ID} value must be greater than zero`,
+  })
   @ApiProperty({
-    name:  `${NAME_VALUE_FOR_ID}`,
+    name: NAME_VALUE_FOR_ID,
     description: 'identifier for a product',
     type: 'bigint',
     minimum: MIN_VALUE_ID,
@@ -71,13 +73,15 @@ export class Product extends BaseEntity {
    * @description Value of the product. The maximum allowed value will depend on the insured coverage, and the calculation is made by summing up all the items submitted."
    */
   @Column({
-    name: `${NAME_VALUE_FOR_VALUE}`,
+    name: NAME_VALUE_FOR_VALUE,
     type: 'decimal',
     precision: DECIMAL_PRECISION_VALUE,
     scale: DECIMAL_SCALE_VALUE,
     nullable: false,
   })
-  @IsNotEmpty({ message:  `The ${NAME_VALUE_FOR_VALUE} of product cannot be empty`  })
+  @IsNotEmpty({
+    message: `The ${NAME_VALUE_FOR_VALUE} of product cannot be empty`,
+  })
   @IsNumber(
     {
       allowInfinity: false,
@@ -85,8 +89,7 @@ export class Product extends BaseEntity {
       maxDecimalPlaces: DECIMAL_SCALE_VALUE,
     },
     {
-      message:
-        `The ${NAME_VALUE_FOR_VALUE} of product must be of type number (decimal) and contain only three decimal places after the separator`,
+      message: `The ${NAME_VALUE_FOR_VALUE} of product must be of type number (decimal) and contain only three decimal places after the separator`,
     },
   )
   @Min(MIN_VALUE_FOR_VALUE, {
@@ -96,7 +99,7 @@ export class Product extends BaseEntity {
     message: `The value of ${NAME_VALUE_FOR_VALUE} product must be less than ${MAX_VALUE_FOR_VALUE}`,
   })
   @ApiProperty({
-    name: `${NAME_VALUE_FOR_VALUE}`,
+    name: NAME_VALUE_FOR_VALUE,
     description: `Price ${NAME_VALUE_FOR_VALUE} of a product`,
     type: 'decimal',
     example: '4.378',
@@ -107,17 +110,21 @@ export class Product extends BaseEntity {
    * @description description of the product
    */
   @Column({
-    name: `${NAME_VALUE_FOR_DESCRIPTION}`,
+    name: NAME_VALUE_FOR_DESCRIPTION,
     length: MAX_LENGTH_VALUE_FOR_DESCRIPTION,
     nullable: false,
   })
-  @IsNotEmpty({ message: `The ${NAME_VALUE_FOR_DESCRIPTION} of product cannot be empty`  })
-  @IsString({ message: `The ${NAME_VALUE_FOR_DESCRIPTION} must be of type string` })
+  @IsNotEmpty({
+    message: `The ${NAME_VALUE_FOR_DESCRIPTION} of product cannot be empty`,
+  })
+  @IsString({
+    message: `The ${NAME_VALUE_FOR_DESCRIPTION} must be of type string`,
+  })
   @Length(MIN_LENGTH_VALUE_FOR_DESCRIPTION, MAX_LENGTH_VALUE_FOR_DESCRIPTION, {
     message: `The value of the ${NAME_VALUE_FOR_DESCRIPTION} must be between ${MIN_LENGTH_VALUE_FOR_DESCRIPTION} and ${MAX_LENGTH_VALUE_FOR_DESCRIPTION} characters`,
   })
   @ApiProperty({
-    name: `${NAME_VALUE_FOR_DESCRIPTION}`,
+    name: NAME_VALUE_FOR_DESCRIPTION,
     description: `${NAME_VALUE_FOR_DESCRIPTION} of a product`,
     type: 'string',
     minLength: MIN_LENGTH_VALUE_FOR_DESCRIPTION,

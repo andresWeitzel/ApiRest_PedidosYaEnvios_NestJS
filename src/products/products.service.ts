@@ -357,7 +357,6 @@ export class ProductsService {
     }
   }
 
-
   /**
    * @description Service to get a paginated list products according to the product type
    * @param {ProductType} inputProductType enum type

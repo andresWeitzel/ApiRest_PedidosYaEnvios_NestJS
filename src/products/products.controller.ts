@@ -32,7 +32,7 @@ let msg: string;
 @Controller('products')
 @ApiTags('ProductsController')
 export class ProductsController {
-  constructor(private readonly  productsService: ProductsService) {}
+  constructor(private readonly productsService: ProductsService) {}
 
   // /**
   //  * @description Controller to add a product to database

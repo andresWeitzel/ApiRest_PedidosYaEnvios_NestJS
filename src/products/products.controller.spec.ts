@@ -17,18 +17,16 @@ let SECOND_QUANTITY_VALUE: number = 20;
 let THIRD_QUANTITY_VALUE: number = 20;
 let ID_NAME_VALUE: string = 'id';
 let DESCRIPTION_NAME_VALUE: string = 'description';
-let SKU_NAME_VALUE: string='sku';
-let VOLUME_NAME_VALUE: string='volume';
+let SKU_NAME_VALUE: string = 'sku';
+let VOLUME_NAME_VALUE: string = 'volume';
 let ORDER_ASC_NAME_VALUE: string = 'asc';
 let ORDER_DESC_NAME_VALUE: string = 'desc';
 let productsController: ProductsController;
-let msg:any;
-let productsList:any;
-
-
+let msg: any;
+let productsList: any;
 
 describe('ProductsControllerTest', () => {
-  productsController=null;
+  productsController = null;
 
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
@@ -42,11 +40,11 @@ describe('ProductsControllerTest', () => {
 
   //Start for getAllProducts
   describe('getAllProducts', () => {
-    msg=`getAllProducts first case : Should return a paginated list of all products for page ${FIRST_PAGE_VALUE}, quantity ${FIRST_QUANTITY_VALUE}, order at ${ID_NAME_VALUE} and order by ${ORDER_ASC_NAME_VALUE} `;
-    productsList=null;
-    
+    msg = `getAllProducts first case : Should return a paginated list of all products for page ${FIRST_PAGE_VALUE}, quantity ${FIRST_QUANTITY_VALUE}, order at ${ID_NAME_VALUE} and order by ${ORDER_ASC_NAME_VALUE} `;
+    productsList = null;
+
     it(msg, async () => {
-      productsList =  await productsController.getAllProducts(
+      productsList = await productsController.getAllProducts(
         FIRST_PAGE_VALUE,
         FIRST_QUANTITY_VALUE,
         ID_NAME_VALUE,
@@ -54,9 +52,7 @@ describe('ProductsControllerTest', () => {
       );
       console.log(`${msg}`);
       console.log(productsList);
-      expect(
-        productsList
-      );
+      expect(productsList);
     });
   });
   describe('getAllProducts', () => {
@@ -87,8 +83,7 @@ describe('ProductsControllerTest', () => {
   //Start with getAllFilterTypeProduct
   describe('getAllFilterTypeProducts', () => {
     it(`should return a paginated listing of all products for page ${FIRST_PAGE_VALUE}, quantity ${FIRST_QUANTITY_VALUE}, order at ${VOLUME_NAME_VALUE} and order by ${ORDER_DESC_NAME_VALUE} according to the type of field ${ID_NAME_VALUE} and value '1' of the field of products`, async () => {
-      productsList = await productsController.
-      getAllFilterTypeProducts(
+      productsList = await productsController.getAllFilterTypeProducts(
         ID_NAME_VALUE,
         '1',
         FIRST_PAGE_VALUE,
@@ -96,12 +91,10 @@ describe('ProductsControllerTest', () => {
         VOLUME_NAME_VALUE,
         ORDER_DESC_NAME_VALUE,
       );
-      console.log({'|| getAllFilterTypeProducts || : ':productsList});
-      expect(
-        productsList
-      );
+      console.log({ '|| getAllFilterTypeProducts || : ': productsList });
+      expect(productsList);
     });
   });
-  
+
   //End with getAllFilterTypeProduct
 });
