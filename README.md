@@ -1,6 +1,6 @@
 ![Index app](./doc/assets/nest-example.png)
 # ApiRest_PedidosYaEnvios_NestJS
-Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplificando parte de la arquitectura de desarrollo de PedidosYa Envíos implementado con NestJS, NodeJS, TypeORM, dotenv, cors, swagger, swagger-ui, MySQL, otros.
+Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplificando parte de la arquitectura de desarrollo de PedidosYa Envíos implementado con NestJS, NodeJS, Typescript, TypeORM, Supertest , Jest, dotenv, cors, swagger, swagger-ui, MySQL, otros.
 
 *   [Repositorio base de datos](https://github.com/andresWeitzel/db_PedidosYaEnvios_MySQL)
 *   [Api Doc PedidosYa Envíos](https://developers.pedidosya.com/courier-api/v3#tag/Shippings/paths/~1v3~1shippings~1estimates/post)
@@ -296,6 +296,8 @@ nest g resource resourceName --no-spec
 - [Query parameters and parameters](https://stackoverflow.com/questions/54958244/how-to-use-query-parameters-in-nest-js)
 - [Using query parameters](https://dev.to/nandhakumar/nest-js-tutorial-3-query-route-params-3gi4)
 - [Autovalidation in NestJS](https://docs.nestjs.com/techniques/validation)
+- [Exceptions & filters](https://www.youtube.com/watch?v=AWqqg9Dtnc4)
+- [ Other Exceptions & filters](https://www.youtube.com/watch?v=4akOFpItbLc)
 
 #### OpenApi and Swagger
 
@@ -309,12 +311,20 @@ nest g resource resourceName --no-spec
 - [Using Foreign keys stackoverflow](https://stackoverflow.com/questions/68556933/typeorm-insert-foreign-key-by-string)
 - [Using Providers with Nestjs](https://docs.nestjs.com/recipes/sql-typeorm)
 
+#### Testing
+- [Ejemplo configuración testing desde cero](https://medium.com/@csalazar94/javascript-testing-made-easy-a-step-by-step-guide-with-jest-and-supertest-8e2a35f13506)
+- [Guía completa Supertest & Jest (Solo usar referencia teórica)](https://ualmtorres.github.io/SeminarioTesting/)
+- [Ejemplo base oficial de implementación de testing)](https://docs.nestjs.com/fundamentals/testing#end-to-end-testing)
+
 #### Librerías
 - [Habilitar y configurar validaciones con Nestjs](https://betterprogramming.pub/validating-complex-requests-with-nestjs-a-practical-example-b55c287f7c99)
 -  [Validación de campos](https://www.npmjs.com/package/node-input-validator)
 -  [Validación de propiedades de clases](https://www.npmjs.com/package/class-validator)
 - [Validación con enumerados](https://snyk.io/advisor/npm-package/class-validator/functions/class-validator.IsEnum)
 - [Validación con fechas](https://stackoverflow.com/questions/68931716/isdatestring-class-validator-nestjs)
+- @nestjs/common
+  - [Enumeration HttpStatus](http://nestjs-doc.exceptionfound.com/enums/httpstatus.html)
+  
 
 
 <br>
