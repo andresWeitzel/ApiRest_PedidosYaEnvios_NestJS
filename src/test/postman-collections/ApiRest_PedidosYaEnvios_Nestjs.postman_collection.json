@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "4cfe9cbc-fe1f-4d11-9cc0-f564b8400f1a",
+		"name": "ApiRest_PedidosYaEnvios_Nestjs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18757319"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GetById",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/products/id/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"id",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/products/list?pageNro=0&pageSize=4&orderBy=id&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"list"
+									],
+									"query": [
+										{
+											"key": "pageNro",
+											"value": "0"
+										},
+										{
+											"key": "pageSize",
+											"value": "4"
+										},
+										{
+											"key": "orderBy",
+											"value": "id"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllWithFilter",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/products/list-with-filter?filterBy=id&filterValue=1&pageNro=0&pageSize=10&orderBy=id&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"list-with-filter"
+									],
+									"query": [
+										{
+											"key": "filterBy",
+											"value": "id"
+										},
+										{
+											"key": "filterValue",
+											"value": "1"
+										},
+										{
+											"key": "pageNro",
+											"value": "0"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "orderBy",
+											"value": "id"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByDescription",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/products/description/sandwich?pageNro=0&pageSize=10&orderBy=id&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"description",
+										"sandwich"
+									],
+									"query": [
+										{
+											"key": "pageNro",
+											"value": "0"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "orderBy",
+											"value": "id"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByProductType",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/products/product-type/cold?pageNro=0&pageSize=10&orderBy=id&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"product-type",
+										"cold"
+									],
+									"query": [
+										{
+											"key": "pageNro",
+											"value": "0"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "orderBy",
+											"value": "id"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "add-product",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{bearer_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\":16.700,\r\n    \"description\":\"Zapatillas Nike Air Zoom 3\",\r\n    \"sku\": \"OLSS78D\",\r\n    \"volume\":0.899,\r\n    \"weight\":0.899,\r\n    \"quantity\":1,\r\n    \"productType\":\"STANDARD\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/products/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH",
+					"item": [
+						{
+							"name": "update-product",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{bearer_token}}",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\":16.700,\r\n    \"description\":\"Zapatillas Nike Air Zoom 3\",\r\n    \"sku\": \"OLSS78D\",\r\n    \"volume\":0.899,\r\n    \"weight\":0.899,\r\n    \"quantity\":1,\r\n    \"productType\":\"STANDARDs\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/products/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3002"
+		}
+	]
+}

@@ -4,12 +4,13 @@ import {
   Body,
   Controller,
   Get,
+  Res,
   Param,
   Patch,
   Post,
-  Put,
   Query,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 //Services
 import { ProductsService } from './products.service';
@@ -18,6 +19,11 @@ import { Product } from './models/product.entity';
 import { ProductDTO } from './models/product.dto';
 //Enums
 import { ProductType } from './enums/productType';
+//Utils
+import { ExceptionHandling } from 'src/utils/http-exception/exception-handling';
+//Const-vars
+let exception: any;
+let msg: string;
 
 /**
  * @description Product controller for all crud operations
@@ -35,12 +41,27 @@ export class ProductsController {
    */
   @Post('/')
   @ApiOperation({ summary: 'Add a product to database' })
-  async createProduct(@Body() newProduct: ProductDTO): Promise<Product> {
+  async createProduct(
+    @Body() newProduct: ProductDTO,
+    @Res() res: Response,
+  ): Promise<ProductDTO | ExceptionHandling> {
     try {
-      return await this.productsService.createProduct(newProduct);
+      newProduct = await this.productsService.createProduct(newProduct);
+    
+      if (newProduct == (null || undefined)) {
+        msg =
+          'The product could not be added to the database why is null or not defined.';
+        exception = new ExceptionHandling().badRequest(res, msg);
+        return exception;
+      }
+    return newProduct;
     } catch (error) {
       console.log(`Error in createProduct controller. Caused by ${error}`);
+      msg = `The product could not be added to the database. Caused by ${error}`;
+      exception = new ExceptionHandling().conflict(res, msg);
+      return exception;
     }
+  
   }
 
   /**
@@ -216,4 +237,40 @@ export class ProductsController {
       );
     }
   }
+
+    /**
+   * @description Controller to get a product according to the creation or update date passed as a parameter
+   * @param {Date} inputCreationUpdateDate Date type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
+   * @returns a response with the products paginated list and status code
+   */
+    @Get('/creation-update-date/:inputCreationUpdateDate')
+    @ApiOperation({
+      summary:
+        'Get a product according to the creation or update date passed as a parameter',
+    })
+    async getByCreationUpdateDateProducts(
+      @Param('inputCreationUpdateDate') inputCreationUpdateDate: Date,
+      @Query('pageNro') pageNro: number,
+      @Query('pageSize') pageSize: number,
+      @Query('orderBy') orderBy: string,
+      @Query('orderAt') orderAt: string,
+    ): Promise<Product[]> {
+      try {
+        return await this.productsService.getByCreationUpdateDateProducts(
+          inputCreationUpdateDate,
+          pageNro,
+          pageSize,
+          orderBy,
+          orderAt,
+        );
+      } catch (error) {
+        console.log(
+          `Error in getByCreationUpdateDateProducts controller. Caused by ${error}`,
+        );
+      }
+    }
 }

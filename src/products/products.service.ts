@@ -238,7 +238,6 @@ export class ProductsService {
       }
       pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
       pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
-     
 
       return await this.productRepository.find({
         where: {
@@ -254,4 +253,42 @@ export class ProductsService {
       console.log(error);
     }
   }
+
+
+    /**
+   * @description Service to get a product according to the creation or update date
+   * @param {string} inputCreationUpdateDate string type
+   * @param {number} pageNro number type
+   * @param {number} pageSize number type
+   * @param {string} orderBy string type
+   * @param {string} orderAt string type
+   * @returns an object with the products paginated list
+   */
+    async getByCreationUpdateDateProducts(
+      inputCreationUpdateDate: Date,
+      pageNro: number,
+      pageSize: number,
+      orderBy: string,
+      orderAt: string,
+    ): Promise<Product[]> {
+      try {
+ 
+        pageNro = (pageNro == (null || undefined || NaN) ? 0 : pageNro) || 0;
+        pageSize = (pageSize == (null || undefined || NaN) ? 20 : pageSize) || 20;
+  
+        return await this.productRepository.find({
+          where: [
+            {creationDate: inputCreationUpdateDate},
+            {updateDate: inputCreationUpdateDate}
+          ],
+          order: {
+            [orderBy]: orderAt,
+          },
+          skip: pageNro,
+          take: pageSize,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
 }
