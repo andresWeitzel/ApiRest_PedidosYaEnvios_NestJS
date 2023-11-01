@@ -296,6 +296,8 @@ nest g resource resourceName --no-spec
 - [Query parameters and parameters](https://stackoverflow.com/questions/54958244/how-to-use-query-parameters-in-nest-js)
 - [Using query parameters](https://dev.to/nandhakumar/nest-js-tutorial-3-query-route-params-3gi4)
 - [Autovalidation in NestJS](https://docs.nestjs.com/techniques/validation)
+- [Exceptions & filters](https://www.youtube.com/watch?v=AWqqg9Dtnc4)
+- [ Other Exceptions & filters](https://www.youtube.com/watch?v=4akOFpItbLc)
 
 #### OpenApi and Swagger
 
@@ -315,6 +317,9 @@ nest g resource resourceName --no-spec
 -  [Validación de propiedades de clases](https://www.npmjs.com/package/class-validator)
 - [Validación con enumerados](https://snyk.io/advisor/npm-package/class-validator/functions/class-validator.IsEnum)
 - [Validación con fechas](https://stackoverflow.com/questions/68931716/isdatestring-class-validator-nestjs)
+- @nestjs/common
+  - [Enumeration HttpStatus](http://nestjs-doc.exceptionfound.com/enums/httpstatus.html)
+  
 
 
 <br>
