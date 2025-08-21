@@ -1,4 +1,19 @@
 ![Index app](./doc/assets/nest-example.png)
+  <div align="right">
+    <img width="24" height="24" src="./doc/assets/icons/backend/javascript-typescript/png/typescript.png" />
+    <img width="24" height="24" src="./doc/assets/icons/database/png/postgres.png" />
+    <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
+    <img width="27" height="27" src="./doc/assets/icons/devops/png/swagger.png" />
+    <img width="25" height="25" src="./doc/assets/icons/backend/javascript-typescript/png/express-js.png" />
+    <img width="25" height="25" src="./doc/assets/icons/backend/javascript-typescript/png/typeorm.png" />
+    <img width="25" height="25" src="./doc/assets/icons/backend/javascript-typescript/png/nestjs.png" />
+    <img width="29" height="27" src="./doc/assets/icons/devops/png/git.png" />
+    <img width="27" height="27" src="./doc/assets/icons/devops/png/postman.png" />
+  </div>
+
+
+  <br>
+
 # ApiRest_PedidosYaEnvios_NestJS
 Api Rest para la gestión de envíos, productos, puntos, rutas, etc, ejemplificando parte de la arquitectura de desarrollo de PedidosYa Envíos implementado con NestJS, NodeJS, TypeORM, dotenv, cors, swagger, swagger-ui, MySQL, otros.
 
