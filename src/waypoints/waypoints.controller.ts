@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { WaypointsService } from './waypoints.service';
 import { CreateWaypointDto } from './dto/create-waypoint.dto';
 import { UpdateWaypointDto } from './dto/update-waypoint.dto';
@@ -23,7 +31,10 @@ export class WaypointsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWaypointDto: UpdateWaypointDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateWaypointDto: UpdateWaypointDto,
+  ) {
     return this.waypointsService.update(+id, updateWaypointDto);
   }
 
